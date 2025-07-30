@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muthu Kumar Koodalingam - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    :root {
+      /* Light theme */
+      --primary-color: #3b82f6;
+      --secondary-color: #2563eb;
+      --text-primary: #1f2937;
+      --text-secondary: #4b5563;
+      --background: #f8fafc;
+      --card-background: #ffffff;
+      --accent-color: #f59e0b;
+      --job-hover: rgba(59, 130, 246, 0.08);
+      --job-bg: rgba(59, 130, 246, 0.04);
+      --border-color: #e2e8f0;
+      --success-color: #10b981;
+      --header-gradient: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    [data-theme="dark"] {
+      --primary-color: #60a5fa;
+      --secondary-color: #93c5fd;
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --background: #111827;
+      --card-background: #1f2937;
+      --accent-color: #fbbf24;
+      --job-hover: rgba(96, 165, 250, 0.15);
+      --job-bg: rgba(96, 165, 250, 0.08);
+      --border-color: #374151;
+      --success-color: #34d399;
+      --header-gradient: linear-gradient(135deg, #60a5fa, #93c5fd);
+    }
+
+    /* Smooth transition for theme switch */
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      font-size: 15px;
+      letter-spacing: -0.1px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: var(--card-background);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      padding: 48px;
+      transition: all 0.3s ease;
+    }
+    
+    .container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+    /* Theme switcher styles */
+    .theme-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--card-background);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .theme-switch:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .theme-switch i {
+      color: var(--primary-color);
+      font-size: 24px;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: #757575;
+      margin-right: 32px;
+    }
+    .header-info {
+      flex: 1;
+    }
+    .name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: var(--header-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 8px;
+    }
+    .contact i {
+      vertical-align: middle;
+      color: #1976d2;
+      margin-right: 4px;
+    }
+    .section {
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--secondary-color);
+      margin-bottom: 28px;
+      letter-spacing: -0.3px;
+      border-left: 4px solid var(--primary-color);
+      padding-left: 16px;
+      position: relative;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 16px;
+      width: 50px;
+      height: 2px;
+      background: var(--primary-color);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .section:hover .section-title::after {
+      transform: scaleX(1);
+    }
+    .job {
+      margin-bottom: 32px;
+      padding: 20px;
+      border-radius: 12px;
+      background: var(--job-bg);
+      transition: all 0.3s ease;
+    }
+    
+    .job:hover {
+      background: var(--job-hover);
+      transform: translateX(5px);
+    }
+    
+    .job-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    
+    .job-meta {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .job-meta::before {
+      content: '🗓';
+      font-size: 16px;
+    }
+    
+    .job-desc {
+      margin-left: 18px;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    
+    .job-desc li {
+      margin-bottom: 8px;
+      position: relative;
+    }
+    
+    .job-desc li::before {
+      content: '▹';
+      position: absolute;
+      left: -18px;
+      color: var(--primary-color);
+    }
+    .skills, .languages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chip {
+      background: var(--job-bg);
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      border-radius: 25px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      display: inline-block;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .chip:hover {
+      transform: translateY(-2px);
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+    
+    .cert {
+      background: linear-gradient(135deg, var(--success-color), var(--accent-color));
+      color: white;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+    
+    .cert::before {
+      content: '🏆';
+      margin-right: 8px;
+      font-size: 1.1em;
+    }
+    
+    .cert:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+    
+    .contact span {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(33, 150, 243, 0.05);
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .contact span:hover {
+      background: rgba(33, 150, 243, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .avatar {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .avatar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50%;
+      border: 3px solid var(--primary-color);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 24px;
+      }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .avatar {
+        margin-bottom: 20px;
+        margin-right: 0;
+      }
+      .contact {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .contact span {
+        width: 100%;
+      }
+    }
+    
+    @media print {
+      .container {
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+      }
+      .avatar::after {
+        display: none;
+      }
+    }
+  </style>
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      
+      // Update theme icon
+      const themeIcon = document.getElementById('theme-icon');
+      themeIcon.textContent = newTheme === 'dark' ? 'light_mode' : 'dark_mode';
+      
+      // Save theme preference
+      localStorage.setItem('theme', newTheme);
+    }
+
+    // Load saved theme preference
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const themeIcon = document.getElementById('theme-icon');
+      themeIcon.textContent = savedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+    });
+  </script>
+</head>
+<body>
+  <div class="theme-switch" onclick="toggleTheme()" title="Toggle theme">
+    <i class="material-icons" id="theme-icon">dark_mode</i>
+  </div>
+  <div class="container">
+    <div class="header">
+      <div class="avatar">
+        <span class="material-icons" style="font-size:64px;">person</span>
+      </div>
+      <div class="header-info">
+        <div class="name">Muthu Kumar Koodalingam</div>
+        <div class="subtitle">Senior QA Automation Engineer</div>
+        <div class="contact">
+          <span><i class="material-icons" style="font-size:18px;">phone</i> (+49) 15204126349</span>
+          <span><i class="material-icons" style="font-size:18px;">email</i> k.muthukumar90@yahoo.in</span>
+          <span><i class="material-icons" style="font-size:18px;">home</i> Frankenallee 38, 60327 Frankfurt, Germany</span>
+          <span><i class="material-icons" style="font-size:18px;">cake</i> 12/07/1990</span>
+          <span><i class="material-icons" style="font-size:18px;">public</i> Indian</span>
+          <span><i class="material-icons" style="font-size:18px;">person</i> Male</span>
+          <span><i class="material-icons" style="font-size:18px;">link</i> <a href="https://www.linkedin.com/in/muthukumark12/" target="_blank">LinkedIn</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Work Experience</div>
+      <div class="job">
+        <div class="job-title">Senior QA Automation Engineer</div>
+        <div class="job-meta">GLS IT Services – Frankfurt, Germany | 01/11/2022 – Current</div>
+        <ul class="job-desc">
+          <li>Developed and executed comprehensive test automation strategy across multiple applications, enhancing testing efficiency and consistency.</li>
+          <li>Implemented Espresso and Appium automation frameworks for component-level, end-to-end, and integration testing, ensuring comprehensive test coverage and reliability.</li>
+          <li>Defined and improved mobile automation processes, including a Mock Android Test Automation Framework (increased test coverage to 87%, reduced testing time).</li>
+          <li>Created and managed a dynamic test metric dashboard using Python and Grafana for real-time tracking and analysis.</li>
+          <li>Led upskilling initiatives for test automation (Espresso, Appium), improving QA team proficiency and expanding automated test cases.</li>
+          <li>Optimized test pyramid model, resulting in a 28% reduction in test execution time.</li>
+          <li>Piloted and recommended AI-driven tools and use cases as an active contributor to AI Testing Society.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="job-title">Test Lead</div>
+        <div class="job-meta">Capgemini – Wrocław, Poland | 15/06/2022 – 30/10/2022</div>
+        <ul class="job-desc">
+          <li>Collaborated with cross-functional teams to align testing with business goals and customer expectations.</li>
+          <li>Enhanced existing SpecFlow automation framework for better performance, scalability, and maintainability.</li>
+          <li>Developed and integrated test scripts for new functionalities, ensuring thorough validation and consistent quality.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="job-title">Engineer Lead</div>
+        <div class="job-meta">Prenetics Innovation Labs – Chennai, India | 22/12/2021 – 31/05/2022</div>
+        <ul class="job-desc">
+          <li>Directed quality assurance operations, fostering strong team communication and collaboration.</li>
+          <li>Facilitated DevOps integration to streamline workflows and accelerate delivery cycles.</li>
+          <li>Enhanced automation framework with mobile automation, improving test coverage and accuracy.</li>
+          <li>Developed a mobile automation pipeline using AWS Device Farm for scalable, consistent testing.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="job-title">Senior Technical Lead / Automation Architect</div>
+        <div class="job-meta">HCL Technologies – Chennai, India | 12/11/2018 – 21/12/2021</div>
+        <ul class="job-desc">
+          <li>Designed and implemented automation platform for Infusion Devices, aligning with strategic automation goals.</li>
+          <li>Architected automation frameworks using Robot Framework for new applications.</li>
+          <li>Managed and mentored a team of 20+ engineers for high-quality automation deliveries.</li>
+          <li>Served as client liaison and SPOC for automation projects.</li>
+          <li>Facilitated daily Scrum meetings and risk management.</li>
+          <li>Implemented CI/CD pipeline for automation.</li>
+          <li>Developed scalable automation framework platform supporting multiple applications.</li>
+          <li>Pioneered robotic-arm automation for physical device testing.</li>
+          <li>Resolved automation test traceability issues.</li>
+          <li>Created automation job scheduler and machine monitor platform.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="job-title">Associate Consultant</div>
+        <div class="job-meta">Capgemini India – Chennai, India | 01/10/2014 – 05/11/2018</div>
+        <ul class="job-desc">
+          <li>Developed automation scripts for new functionalities and integrated into existing frameworks.</li>
+          <li>Managed client communication and team pipeline activities.</li>
+          <li>Primary POC for automation migration from Flex to HTML5.</li>
+          <li>Implemented Jenkins CI for automation, reducing turnaround time for stability checks.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="job-title">Programmer Analyst</div>
+        <div class="job-meta">Cognizant Technology Solution – Chennai, India | 27/01/2012 – 19/09/2014</div>
+        <ul class="job-desc">
+          <li>Developed automation scripts for new functionalities.</li>
+          <li>Performed failure analysis of failed automation scripts in Selenium.</li>
+          <li>Enhanced existing automation scripts after project changes and migrated Selenium scripts to QTP.</li>
+          <li>Prepared QA execution plans, designed and reviewed test scenarios and cases.</li>
+          <li>Executed test cases for projects, CRs, and regression.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Education</div>
+      <div class="job">
+        <div class="job-title">Bachelor of Technology in Information Technology</div>
+        <div class="job-meta">Kalasalingam University, Krishnankoil, India | 10/06/2007 – 20/05/2011</div>
+        <div class="job-desc"><a href="https://kalasalingam.ac.in/" target="_blank">kalasalingam.ac.in</a></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Language Skills</div>
+      <div class="languages">
+        <span class="chip">Tamil </span>
+        <span class="chip">English </span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Skills</div>
+      <div class="skills">
+        <span class="chip">Test Automations</span>
+        <span class="chip">Appium</span>
+        <span class="chip">API Automation</span>
+        <span class="chip">Postman</span>
+        <span class="chip">Mobile Automation</span>
+        <span class="chip">Agile (Scrum)</span>
+        <span class="chip">API Testing</span>
+        <span class="chip">Functional Testing</span>
+        <span class="chip">Jira</span>
+        <span class="chip">Jenkins</span>
+        <span class="chip">Integration Testing</span>
+        <span class="chip">Selenium</span>
+        <span class="chip">Python Automation</span>
+        <span class="chip">Robotic Automation</span>
+        <span class="chip">Confluence</span>
+        <span class="chip">Python/Robot Framework</span>
+        <span class="chip">Web Automation</span>
+        <span class="chip">Karate Framework</span>
+        <span class="chip">WebdriverIO</span>
+        <span class="chip">Load testing</span>
+        <span class="chip">Espresso (UI Test)</span>
+        <span class="chip">Robolectric/JUnit</span>
+        <span class="chip">appium</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Certification</div>
+      <span class="chip">ISTQB CTFL Certification (01/01/2024)</span>
+    </div>
+  </div>
+</body>
+</html>
