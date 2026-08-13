@@ -2,32 +2,32 @@ const projects = [
   {
     no: "01",
     name: "UnifiedTest",
-    title: "Test execution made observable across frameworks.",
-    body: "A Gradle plugin that carries results from console output and HTML reports through to OpenTelemetry traces and test-management integration.",
+    title: "One test run. Every signal connected.",
+    body: "A Gradle plugin that turns Java test output into traceable release evidence across HTML reports, OpenTelemetry and test management.",
     tags: ["Java / Gradle", "JUnit · TestNG · Spock", "OTLP"],
     href: "https://github.com/mov2day/UnifiedTest",
   },
   {
     no: "02",
     name: "Karate Test Generator",
-    title: "API tests generated from the specs you already have.",
-    body: "A VS Code extension for creating and maintaining Karate API tests from OpenAPI, Postman and documentation — with bug hunting, coverage and CI repair.",
+    title: "From API spec to useful tests — faster.",
+    body: "A VS Code extension that turns OpenAPI, Postman and documentation into maintainable Karate tests, then helps with coverage, bug hunting and CI repair.",
     tags: ["TypeScript", "OpenAPI · Postman", "Karate DSL"],
     href: "https://github.com/mov2day/KaratePlugin",
   },
   {
     no: "03",
     name: "AssertIQ",
-    title: "Static test intelligence for JavaScript and TypeScript.",
-    body: "Assesses test-suite risk without running tests and gives CI a clear way to gate new quality debt.",
+    title: "Find brittle tests before CI does.",
+    body: "Static analysis for JavaScript and TypeScript test suites, exposing risk early and giving CI a clear gate for new quality debt.",
     tags: ["TypeScript / CLI", "HTML · JSON · SARIF", "GitHub Action"],
     href: "https://github.com/mov2day/assertiq",
   },
   {
     no: "04",
     name: "QE-MCP",
-    title: "Quality enforcement for coding agents.",
-    body: "An MCP server that gives agents repository-aware test plans, validation layers and strategy-based quality gates.",
+    title: "Give coding agents a quality conscience.",
+    body: "An MCP server that grounds agents in repository-aware test plans, layered validation and strategy-based quality gates.",
     tags: ["Python / FastMCP", "Pytest · Compose", "Quality gates"],
     href: "https://github.com/mov2day/Andriod-test-mcp",
   },
@@ -35,16 +35,16 @@ const projects = [
 
 const principles = [
   {
-    title: "Build the right level of coverage",
-    body: "Unit, integration, end-to-end — proportioned to real risk rather than to habit, so the suite stays affordable to run and to trust.",
+    title: "Test the risk, not the checklist",
+    body: "Use the cheapest test level that can expose the failure that matters. Coverage should protect decisions, not inflate a dashboard.",
   },
   {
-    title: "Make failure useful, not noisy",
-    body: "A red run should carry a signal, a diagnosis and an action. Reports exist to shorten the distance between failure and fix.",
+    title: "Make every red build worth reading",
+    body: "A failure should arrive with context, a likely cause and a next step. Good reporting shortens the distance from red to resolved.",
   },
   {
-    title: "Give the team a system it can own",
-    body: "Patterns, coaching and adoption. Automation that only one person can maintain is a liability disguised as coverage.",
+    title: "Build it so the team owns it",
+    body: "Patterns, documentation and coaching turn a framework into a shared capability. If one person must guard it, it does not scale.",
   },
 ];
 
@@ -53,28 +53,28 @@ const roles = [
     period: "2022 — Present",
     title: "Senior QA Automation Engineer",
     place: "GLS IT Services, Frankfurt",
-    body: "Defined automation strategy, built mobile frameworks and test metrics, and supported QA upskilling across the chapter. Improved test execution time by 28%.",
+    body: "Set the automation direction, built mobile frameworks and test metrics, and helped the QA chapter adopt them — cutting execution time by 28%.",
     current: true,
   },
   {
     period: "2022",
     title: "Test Lead",
     place: "Capgemini, Wrocław",
-    body: "Improved the SpecFlow framework and integrated testing for new functional releases.",
+    body: "Strengthened the SpecFlow framework and integration coverage so new functional releases reached feedback sooner.",
     current: false,
   },
   {
     period: "2021 — 2022",
     title: "Engineer Lead",
     place: "Prenetics Innovation Labs, Chennai",
-    body: "Led QA operations and implemented a scalable real-device mobile automation pipeline using AWS Device Farm.",
+    body: "Led QA operations and took mobile automation onto real devices at scale with AWS Device Farm.",
     current: false,
   },
   {
     period: "2018 — 2021",
     title: "Automation Architect / Senior Technical Lead",
     place: "HCL Technologies, Chennai",
-    body: "Led 20+ engineers and built multi-application automation platforms, CI/CD workflows, machine monitoring and robotic-arm automation.",
+    body: "Led 20+ engineers building automation platforms across applications, CI/CD, machine monitoring and robotic-arm testing.",
     current: false,
   },
 ];
@@ -120,15 +120,15 @@ export function Portfolio() {
           <div className="max-w-3xl">
             <div className="mb-6 inline-block rounded-full border border-foreground/10 px-3 py-1">
               <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-                Status: Senior QA Automation Engineer / Frankfurt, DE
+                Senior QA Automation Engineer / Frankfurt, DE
               </span>
             </div>
             <h1 className="mb-8 text-5xl leading-[0.92] font-extrabold tracking-[-0.055em] text-balance sm:text-6xl md:text-8xl">
-              I make software <span className="text-accent">quality</span> visible.
+              I turn release <span className="text-accent">risk</span> into evidence.
             </h1>
             <p className="max-w-2xl text-xl leading-relaxed text-muted-foreground">
-              Fourteen years building test automation that helps teams understand what changed, what
-              matters, and when a release is ready.
+              Fourteen years building automation that catches what matters, explains what broke and
+              gives teams a clear reason to ship.
             </p>
           </div>
         </header>
@@ -137,11 +137,11 @@ export function Portfolio() {
           <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-2">
             <div>
               <h2 className="mb-8 font-mono text-xs tracking-[0.3em] text-accent uppercase">
-                Perspective
+                Point of view
               </h2>
               <p className="text-3xl leading-snug font-light">
-                Quality engineering is a way of making better decisions — turning tests from a
-                pass/fail event into useful evidence for the people building the software.
+                The best test suite does more than pass. It makes the next release decision easier
+                to defend.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-8 md:border-l md:border-background/10 md:pl-16">
@@ -175,7 +175,7 @@ export function Portfolio() {
 
         <section id="projects" className="mx-auto max-w-7xl scroll-mt-20 px-6 py-24 md:py-32">
           <div className="mb-16 flex items-end justify-between border-b border-foreground/10 pb-8">
-            <h2 className="text-4xl font-bold tracking-tight">OSS / Tooling</h2>
+            <h2 className="text-4xl font-bold tracking-tight">Tools that remove QA friction.</h2>
             <span className="font-mono text-xs text-muted-foreground">/04_ENTRIES</span>
           </div>
 
@@ -216,9 +216,7 @@ export function Portfolio() {
           className="scroll-mt-20 border-y border-foreground/5 bg-secondary px-6 py-24 md:py-32"
         >
           <div className="mx-auto max-w-7xl">
-            <h2 className="mb-16 font-mono text-xs tracking-[0.3em] uppercase">
-              Practice Principles
-            </h2>
+            <h2 className="mb-16 font-mono text-xs tracking-[0.3em] uppercase">How I build</h2>
             <div className="grid gap-12 md:grid-cols-3">
               {principles.map((pr, index) => (
                 <div key={pr.title} className="principle-item">
@@ -234,7 +232,9 @@ export function Portfolio() {
         <section id="experience" className="mx-auto max-w-7xl scroll-mt-20 px-6 py-24 md:py-32">
           <div className="flex flex-col gap-16 md:flex-row">
             <div className="md:w-1/3 md:shrink-0">
-              <h2 className="sticky top-32 text-4xl font-bold tracking-tight">Engineering Path</h2>
+              <h2 className="sticky top-32 text-4xl font-bold tracking-tight">
+                Built in the real world.
+              </h2>
             </div>
             <div className="space-y-20 md:w-2/3">
               {roles.map((r) => (
@@ -263,17 +263,17 @@ export function Portfolio() {
           <div className="focus-panel relative overflow-hidden bg-foreground p-8 text-background sm:p-12 md:p-20">
             <div className="relative z-10 max-w-2xl">
               <h2 className="mb-6 font-mono text-xs tracking-widest text-accent uppercase">
-                Currently Focusing On
+                Current focus
               </h2>
               <p className="mb-8 text-3xl font-light">
-                AI use cases that make existing QA expertise easier to apply: agents for test design
-                and analysis, reusable skills for common practices, and quality gates that retain
-                human accountability.
+                AI should sharpen QA judgment, not replace it. I’m exploring agents, reusable skills
+                and quality gates that make expertise easier to apply while keeping people
+                accountable.
               </p>
               <div className="flex items-center gap-4">
                 <div className="h-2 w-2 animate-pulse rounded-full bg-accent" />
                 <span className="font-mono text-xs tracking-widest uppercase">
-                  Open to a conversation
+                  Open to thoughtful collaborations
                 </span>
               </div>
             </div>
@@ -291,8 +291,9 @@ export function Portfolio() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-12 md:flex-row">
           <div>
             <h2 className="mb-8 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-              Working through a<br />
-              quality problem?
+              Let’s make your next
+              <br />
+              release easier to trust.
             </h2>
             <a
               href="mailto:k.muthukumar90@yahoo.in"
@@ -337,7 +338,7 @@ export function Portfolio() {
             © 2026 Muthu Kumar Koodalingam
           </span>
           <span className="font-mono text-[10px] text-muted-foreground uppercase">
-            Crafted for Reliability
+            Evidence before confidence
           </span>
         </div>
       </footer>
