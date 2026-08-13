@@ -130,6 +130,11 @@ export function Portfolio() {
               Fourteen years building automation that catches what matters, explains what broke and
               gives teams a clear reason to ship.
             </p>
+            <div className="expertise-line mt-10 flex flex-wrap gap-x-6 gap-y-3 font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+              <span>Test architecture</span>
+              <span>Feedback systems</span>
+              <span>AI for QA</span>
+            </div>
           </div>
         </header>
 
@@ -148,25 +153,25 @@ export function Portfolio() {
               <div className="metric-cell">
                 <span className="mb-2 block font-mono text-4xl">14</span>
                 <span className="text-xs tracking-widest text-background/50 uppercase">
-                  Years in quality
+                  Years solving quality problems
                 </span>
               </div>
               <div className="metric-cell">
                 <span className="mb-2 block font-mono text-4xl">04</span>
                 <span className="text-xs tracking-widest text-background/50 uppercase">
-                  Open-source tools
+                  Tools shipped in public
                 </span>
               </div>
               <div className="metric-cell">
                 <span className="mb-2 block font-mono text-4xl">28%</span>
                 <span className="text-xs tracking-widest text-background/50 uppercase">
-                  Faster execution
+                  Faster test execution
                 </span>
               </div>
               <div className="metric-cell">
                 <span className="mb-2 block font-mono text-4xl">CTFL</span>
                 <span className="text-xs tracking-widest text-background/50 uppercase">
-                  ISTQB certified
+                  Certified foundation
                 </span>
               </div>
             </div>
@@ -175,7 +180,14 @@ export function Portfolio() {
 
         <section id="projects" className="mx-auto max-w-7xl scroll-mt-20 px-6 py-24 md:py-32">
           <div className="mb-16 flex items-end justify-between border-b border-foreground/10 pb-8">
-            <h2 className="text-4xl font-bold tracking-tight">Tools that remove QA friction.</h2>
+            <div>
+              <span className="font-mono text-[10px] tracking-[0.25em] text-accent uppercase">
+                Selected open-source work
+              </span>
+              <h2 className="mt-3 text-4xl font-bold tracking-tight">
+                Tools that remove QA friction.
+              </h2>
+            </div>
             <span className="font-mono text-xs text-muted-foreground">/04_ENTRIES</span>
           </div>
 
@@ -216,7 +228,12 @@ export function Portfolio() {
           className="scroll-mt-20 border-y border-foreground/5 bg-secondary px-6 py-24 md:py-32"
         >
           <div className="mx-auto max-w-7xl">
-            <h2 className="mb-16 font-mono text-xs tracking-[0.3em] uppercase">How I build</h2>
+            <div className="mb-16 max-w-2xl">
+              <h2 className="font-mono text-xs tracking-[0.3em] uppercase">How I build</h2>
+              <p className="mt-5 text-2xl leading-snug font-medium tracking-tight">
+                Three rules for automation people can run, read and trust.
+              </p>
+            </div>
             <div className="grid gap-12 md:grid-cols-3">
               {principles.map((pr, index) => (
                 <div key={pr.title} className="principle-item">
@@ -235,6 +252,10 @@ export function Portfolio() {
               <h2 className="sticky top-32 text-4xl font-bold tracking-tight">
                 Built in the real world.
               </h2>
+              <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground md:sticky md:top-56">
+                Product, consulting and enterprise teams — each with different constraints, all
+                needing faster feedback.
+              </p>
             </div>
             <div className="space-y-20 md:w-2/3">
               {roles.map((r) => (
@@ -266,9 +287,9 @@ export function Portfolio() {
                 Current focus
               </h2>
               <p className="mb-8 text-3xl font-light">
-                AI should sharpen QA judgment, not replace it. I’m exploring agents, reusable skills
-                and quality gates that make expertise easier to apply while keeping people
-                accountable.
+                AI should sharpen QA judgment, not replace it. I’m building practical ways to carry
+                test expertise into everyday engineering — with agents, reusable skills and quality
+                gates that keep people accountable.
               </p>
               <div className="flex items-center gap-4">
                 <div className="h-2 w-2 animate-pulse rounded-full bg-accent" />

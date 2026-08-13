@@ -265,6 +265,19 @@
     content: "";
   }
 
+  .expertise-line span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .expertise-line span::before {
+    width: 0.35rem;
+    height: 0.35rem;
+    background: var(--color-accent);
+    content: "";
+  }
+
   .project-card::before {
     position: absolute;
     top: 0;
