@@ -86,7 +86,7 @@ export function Portfolio() {
         Skip to content
       </a>
 
-      <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-foreground/8 bg-background/90 px-5 py-4 backdrop-blur-md sm:px-6">
+      <nav className="site-nav sticky top-0 z-50 flex items-center justify-between border-b border-foreground/8 bg-background/90 px-5 py-4 backdrop-blur-md sm:px-6">
         <a href="#content" className="font-mono text-sm font-bold tracking-tight">
           Muthu Kumar
         </a>
@@ -116,7 +116,7 @@ export function Portfolio() {
       </nav>
 
       <main id="content">
-        <header className="page-enter relative mx-auto max-w-7xl px-6 pt-20 pb-24 md:pt-24 md:pb-32">
+        <header className="hero-grid page-enter relative mx-auto max-w-7xl px-6 pt-20 pb-24 md:pt-24 md:pb-32">
           <div className="max-w-3xl">
             <div className="mb-6 inline-block rounded-full border border-foreground/10 px-3 py-1">
               <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
@@ -133,7 +133,7 @@ export function Portfolio() {
           </div>
         </header>
 
-        <section className="bg-foreground px-6 py-20 text-background md:py-24">
+        <section className="perspective-band bg-foreground px-6 py-20 text-background md:py-24">
           <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-2">
             <div>
               <h2 className="mb-8 font-mono text-xs tracking-[0.3em] text-accent uppercase">
@@ -145,25 +145,25 @@ export function Portfolio() {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-8 md:border-l md:border-background/10 md:pl-16">
-              <div>
+              <div className="metric-cell">
                 <span className="mb-2 block font-mono text-4xl">14</span>
                 <span className="text-xs tracking-widest text-background/50 uppercase">
                   Years in quality
                 </span>
               </div>
-              <div>
+              <div className="metric-cell">
                 <span className="mb-2 block font-mono text-4xl">04</span>
                 <span className="text-xs tracking-widest text-background/50 uppercase">
                   Open-source tools
                 </span>
               </div>
-              <div>
+              <div className="metric-cell">
                 <span className="mb-2 block font-mono text-4xl">28%</span>
                 <span className="text-xs tracking-widest text-background/50 uppercase">
                   Faster execution
                 </span>
               </div>
-              <div>
+              <div className="metric-cell">
                 <span className="mb-2 block font-mono text-4xl">CTFL</span>
                 <span className="text-xs tracking-widest text-background/50 uppercase">
                   ISTQB certified
@@ -186,7 +186,7 @@ export function Portfolio() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex h-full flex-col bg-background p-6 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-secondary focus-visible:z-10 md:p-10"
+                className="project-card group relative flex h-full flex-col overflow-hidden bg-background p-6 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-secondary focus-visible:z-10 md:p-10"
               >
                 <span className="mb-4 block font-mono text-xs text-accent">
                   {p.no}. {p.name}
@@ -203,6 +203,9 @@ export function Portfolio() {
                     </span>
                   ))}
                 </div>
+                <span className="project-arrow" aria-hidden="true">
+                  ↗
+                </span>
               </a>
             ))}
           </div>
@@ -217,8 +220,9 @@ export function Portfolio() {
               Practice Principles
             </h2>
             <div className="grid gap-12 md:grid-cols-3">
-              {principles.map((pr) => (
-                <div key={pr.title}>
+              {principles.map((pr, index) => (
+                <div key={pr.title} className="principle-item">
+                  <span className="mb-8 block font-mono text-xs text-accent">0{index + 1}</span>
                   <h3 className="mb-4 text-lg font-bold">{pr.title}</h3>
                   <p className="text-sm leading-relaxed text-muted-foreground">{pr.body}</p>
                 </div>
@@ -234,7 +238,12 @@ export function Portfolio() {
             </div>
             <div className="space-y-20 md:w-2/3">
               {roles.map((r) => (
-                <div key={r.title} className="relative border-l-2 border-accent/20 pl-8">
+                <div
+                  key={r.title}
+                  className={`role-item relative border-l-2 pl-8 ${
+                    r.current ? "border-accent" : "border-accent/20"
+                  }`}
+                >
                   <div
                     className={`absolute -left-[9px] top-0 h-4 w-4 rounded-full ${
                       r.current ? "bg-accent" : "bg-foreground"
@@ -251,7 +260,7 @@ export function Portfolio() {
         </section>
 
         <section className="mx-auto max-w-7xl px-6 py-20 md:py-24">
-          <div className="relative overflow-hidden bg-foreground p-8 text-background sm:p-12 md:p-20">
+          <div className="focus-panel relative overflow-hidden bg-foreground p-8 text-background sm:p-12 md:p-20">
             <div className="relative z-10 max-w-2xl">
               <h2 className="mb-6 font-mono text-xs tracking-widest text-accent uppercase">
                 Currently Focusing On
@@ -277,7 +286,7 @@ export function Portfolio() {
 
       <footer
         id="contact"
-        className="scroll-mt-20 border-t border-foreground/5 px-6 py-20 md:py-24"
+        className="site-footer scroll-mt-20 border-t border-foreground/5 px-6 py-20 md:py-24"
       >
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-12 md:flex-row">
           <div>

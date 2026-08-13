@@ -146,6 +146,11 @@
     color: var(--color-foreground);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    background-image: linear-gradient(var(--color-foreground) 1px, transparent 1px);
+    background-size: 100% 4rem;
+    background-position: 0 -1px;
+    background-attachment: fixed;
+    background-blend-mode: soft-light;
   }
 
   html {
@@ -189,6 +194,155 @@
   .page-enter {
     animation: page-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
+
+  .site-nav::after {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: clamp(4rem, 12vw, 10rem);
+    height: 1px;
+    background: var(--color-accent);
+    content: "";
+  }
+
+  .hero-grid::before {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 1.5rem;
+    bottom: 0;
+    width: min(34vw, 28rem);
+    border-right: 1px solid color-mix(in oklch, var(--color-foreground) 8%, transparent);
+    border-left: 1px solid color-mix(in oklch, var(--color-foreground) 8%, transparent);
+    background-image:
+      linear-gradient(
+        to right,
+        transparent 49.8%,
+        color-mix(in oklch, var(--color-foreground) 8%, transparent) 50%,
+        transparent 50.2%
+      ),
+      linear-gradient(
+        to bottom,
+        transparent 49.8%,
+        color-mix(in oklch, var(--color-foreground) 8%, transparent) 50%,
+        transparent 50.2%
+      );
+    background-size: 4rem 4rem;
+    content: "";
+  }
+
+  .perspective-band {
+    position: relative;
+    box-shadow: inset 0 1px 0 color-mix(in oklch, var(--color-background) 12%, transparent);
+  }
+
+  .perspective-band::after {
+    position: absolute;
+    right: clamp(1.5rem, 5vw, 5rem);
+    bottom: 0;
+    color: color-mix(in oklch, var(--color-background) 4%, transparent);
+    content: "QE";
+    font-size: clamp(7rem, 19vw, 18rem);
+    font-weight: 900;
+    letter-spacing: -0.09em;
+    line-height: 0.72;
+    pointer-events: none;
+  }
+
+  .metric-cell {
+    position: relative;
+    padding: 0.25rem 0 1.25rem;
+    border-bottom: 1px solid color-mix(in oklch, var(--color-background) 12%, transparent);
+  }
+
+  .metric-cell::before {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 2rem;
+    height: 1px;
+    background: var(--color-accent);
+    content: "";
+  }
+
+  .project-card::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--color-accent);
+    content: "";
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 260ms ease;
+  }
+
+  .project-card:hover::before,
+  .project-card:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  .project-arrow {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: var(--color-muted-foreground);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    transition:
+      color 200ms ease,
+      transform 200ms ease;
+  }
+
+  .project-card:hover .project-arrow {
+    color: var(--color-accent);
+    transform: translate(0.15rem, -0.15rem);
+  }
+
+  .principle-item {
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--color-foreground);
+  }
+
+  .role-item {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .role-item::after {
+    position: absolute;
+    right: 0;
+    bottom: -2.5rem;
+    left: 2rem;
+    height: 1px;
+    background: color-mix(in oklch, var(--color-foreground) 7%, transparent);
+    content: "";
+  }
+
+  .focus-panel {
+    border: 1px solid color-mix(in oklch, var(--color-accent) 45%, transparent);
+    box-shadow: 0.75rem 0.75rem 0 var(--color-accent);
+  }
+
+  .focus-panel::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 7rem;
+    height: 7rem;
+    border-bottom: 1px solid color-mix(in oklch, var(--color-background) 12%, transparent);
+    border-left: 1px solid color-mix(in oklch, var(--color-background) 12%, transparent);
+    content: "";
+  }
+
+  .site-footer {
+    background-image: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--color-accent) 4%, transparent),
+      transparent 42%
+    );
+  }
 }
 
 @keyframes page-enter {
@@ -210,5 +364,17 @@
 
   .page-enter {
     animation: none;
+  }
+}
+
+@media (max-width: 48rem) {
+  .hero-grid::before {
+    right: -4rem;
+    width: 14rem;
+    opacity: 0.65;
+  }
+
+  .focus-panel {
+    box-shadow: 0.45rem 0.45rem 0 var(--color-accent);
   }
 }
