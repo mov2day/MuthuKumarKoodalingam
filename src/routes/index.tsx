@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/react";
+
 const projects = [
   {
     no: "01",
@@ -363,6 +365,7 @@ export function Portfolio() {
           </span>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
