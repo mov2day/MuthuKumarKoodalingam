@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'content/karate/*.md'
+      - 'scripts/syndicate.mjs'
+      - '.github/workflows/syndicate-karate-blog.yml'
   workflow_dispatch:
 
 permissions:
@@ -19,14 +21,22 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Detect new published articles
+      - name: Detect articles to syndicate
         id: changed
         shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             files=$(git ls-files 'content/karate/*.md')
           else
-            files=$(git diff --diff-filter=A --name-only "${{ github.event.before }}" "${{ github.sha }}" -- 'content/karate/*.md')
+            content_files=$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- 'content/karate/*.md')
+            infra_changed=$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- 'scripts/syndicate.mjs' '.github/workflows/syndicate-karate-blog.yml')
+            if [[ -n "$content_files" ]]; then
+              files="$content_files"
+            elif [[ -n "$infra_changed" ]]; then
+              files=$(git ls-files 'content/karate/*.md')
+            else
+              files=""
+            fi
           fi
           {
             echo 'files<<EOF'
@@ -48,6 +58,6 @@ jobs:
             node scripts/syndicate.mjs "$file"
           done <<< "${{ steps.changed.outputs.files }}"
 
-      - name: Nothing new to syndicate
+      - name: Nothing to syndicate
         if: steps.changed.outputs.files == ''
-        run: echo 'No newly-added Karate articles in this commit.'
+        run: echo 'No Karate articles need syndication for this run.'
