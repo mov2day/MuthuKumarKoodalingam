@@ -33,11 +33,14 @@ if (meta.published === 'false') {
 }
 
 const canonical = `${site}/blog/${meta.slug}/`;
-const tags = (meta.tags || 'testing,api')
+const rawTags = (meta.tags || 'testing,api')
   .split(',')
-  .map((tag) => tag.trim())
+  .map((tag) => tag.trim().toLowerCase())
   .filter(Boolean)
   .slice(0, 4);
+const devTags = rawTags
+  .map((tag) => tag.replace(/[^a-z0-9]/g, ''))
+  .filter(Boolean);
 
 async function publishDev() {
   const token = process.env.DEVTO_API_KEY;
@@ -52,13 +55,9 @@ async function publishDev() {
     Accept: 'application/vnd.forem.api-v1+json',
   };
 
-  const existingResponse = await fetch('https://dev.to/api/articles/me/all?per_page=1000', {
-    headers,
-  });
+  const existingResponse = await fetch('https://dev.to/api/articles/me/all?per_page=1000', { headers });
   const existing = await existingResponse.json();
-  if (!existingResponse.ok) {
-    throw new Error(`DEV lookup failed (${existingResponse.status}): ${JSON.stringify(existing)}`);
-  }
+  if (!existingResponse.ok) throw new Error(`DEV lookup failed (${existingResponse.status}): ${JSON.stringify(existing)}`);
 
   const match = existing.find(
     (article) => sameUrl(article.canonical_url, canonical) || article.title === meta.title,
@@ -77,7 +76,7 @@ async function publishDev() {
         description: meta.description,
         published: true,
         body_markdown: body,
-        tags,
+        tags: devTags,
         canonical_url: canonical,
       },
     }),
@@ -118,19 +117,16 @@ async function publishHashnode() {
     return;
   }
 
-  const searchQuery = `query Search($filter: SearchPostsOfPublicationFilter!) {
-    searchPostsOfPublication(first: 10, sortBy: DATE_PUBLISHED_DESC, filter: $filter) {
-      edges { node { id title url canonicalUrl } }
+  const existingQuery = `query Existing($publicationId: ObjectId!, $slug: String!) {
+    publication(id: $publicationId) {
+      post(slug: $slug) { id title url canonicalUrl }
     }
   }`;
-
-  const searchData = await hashnodeRequest(token, searchQuery, {
-    filter: { publicationId, query: meta.title },
+  const existingData = await hashnodeRequest(token, existingQuery, {
+    publicationId,
+    slug: meta.slug,
   });
-  const existing = searchData.data.searchPostsOfPublication.edges
-    .map((edge) => edge.node)
-    .find((post) => sameUrl(post.canonicalUrl, canonical) || post.title === meta.title);
-
+  const existing = existingData.data.publication?.post;
   if (existing) {
     console.log(`Hashnode: already published at ${existing.url}`);
     return;
@@ -145,9 +141,10 @@ async function publishHashnode() {
       publicationId,
       title: meta.title,
       subtitle: meta.description || undefined,
+      slug: meta.slug,
       contentMarkdown: body,
       originalArticleURL: canonical,
-      tags: tags.map((slug) => ({ slug })),
+      tags: rawTags.map((slug) => ({ slug })),
       metaTitle: meta.title,
       metaDescription: meta.description || undefined,
       enableToc: true,
