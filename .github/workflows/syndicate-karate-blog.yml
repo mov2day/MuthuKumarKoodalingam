@@ -1,0 +1,53 @@
+name: Syndicate Karate blog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/karate/*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syndicate-new-articles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect new published articles
+        id: changed
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            files=$(git ls-files 'content/karate/*.md')
+          else
+            files=$(git diff --diff-filter=A --name-only "${{ github.event.before }}" "${{ github.sha }}" -- 'content/karate/*.md')
+          fi
+          {
+            echo 'files<<EOF'
+            echo "$files"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Publish to DEV and Hashnode
+        if: steps.changed.outputs.files != ''
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          HASHNODE_PAT: ${{ secrets.HASHNODE_PAT }}
+          HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
+        shell: bash
+        run: |
+          while IFS= read -r file; do
+            [[ -z "$file" ]] && continue
+            echo "Syndicating $file"
+            node scripts/syndicate.mjs "$file"
+          done <<< "${{ steps.changed.outputs.files }}"
+
+      - name: Nothing new to syndicate
+        if: steps.changed.outputs.files == ''
+        run: echo 'No newly-added Karate articles in this commit.'
