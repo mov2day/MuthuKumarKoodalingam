@@ -89,7 +89,7 @@ async function publishDev() {
 }
 
 async function hashnodeRequest(token, query, variables) {
-  const response = await fetch('https://gql.hashnode.com/', {
+  const response = await fetch('https://gql-beta.hashnode.com', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,13 @@ async function hashnodeRequest(token, query, variables) {
     },
     body: JSON.stringify({ query, variables }),
   });
-  const data = await response.json();
+  const raw = await response.text();
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    throw new Error(`Hashnode returned non-JSON (${response.status}): ${raw.slice(0, 180)}`);
+  }
   if (!response.ok || data.errors?.length) {
     throw new Error(`Hashnode request failed (${response.status}): ${JSON.stringify(data.errors || data)}`);
   }
@@ -151,4 +157,9 @@ async function publishHashnode() {
   console.log(`Hashnode: ${data.data.publishPost.post.url}`);
 }
 
-await Promise.all([publishDev(), publishHashnode()]);
+const results = await Promise.allSettled([publishDev(), publishHashnode()]);
+const failures = results.filter((result) => result.status === 'rejected');
+if (failures.length) {
+  for (const failure of failures) console.error(failure.reason?.stack || failure.reason);
+  process.exitCode = 1;
+}
