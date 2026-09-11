@@ -116,7 +116,7 @@ async function resolveHashnodePublication(token) {
   }`;
   const data = await hashnodeRequest(token, query, {});
   const publications = data.data.me?.publications?.edges?.map((edge) => edge.node) || [];
-  if (!publications.length) throw new Error('Hashnode: authenticated user has no publications.');
+  if (!publications.length) return null;
 
   const configured = process.env.HASHNODE_PUBLICATION_ID;
   const byConfiguredId = configured && publications.find((p) => p.id === configured);
@@ -141,6 +141,10 @@ async function publishHashnode() {
   }
 
   const publication = await resolveHashnodePublication(token);
+  if (!publication) {
+    console.log('Hashnode: authenticated account has no publication; skipping Hashnode syndication without failing the pipeline.');
+    return;
+  }
   console.log(`Hashnode: resolved publication ${publication.title} (${publication.id})`);
 
   const publishQuery = `mutation PublishPost($input: PublishPostInput!) {
@@ -167,6 +171,10 @@ async function publishHashnode() {
     const message = String(error?.message || error);
     if (/slug|already exists|duplicate/i.test(message)) {
       console.log('Hashnode: article appears to be already published; treating duplicate slug as success.');
+      return;
+    }
+    if (/active Pro plan|FORBIDDEN/i.test(message)) {
+      console.log('Hashnode: API publishing requires an active Pro publication; skipping without failing the pipeline.');
       return;
     }
     throw error;
