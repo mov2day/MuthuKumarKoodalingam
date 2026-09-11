@@ -38,9 +38,7 @@ const rawTags = (meta.tags || 'testing,api')
   .map((tag) => tag.trim().toLowerCase())
   .filter(Boolean)
   .slice(0, 4);
-const devTags = rawTags
-  .map((tag) => tag.replace(/[^a-z0-9]/g, ''))
-  .filter(Boolean);
+const devTags = rawTags.map((tag) => tag.replace(/[^a-z0-9]/g, '')).filter(Boolean);
 
 async function publishDev() {
   const token = process.env.DEVTO_API_KEY;
@@ -59,9 +57,7 @@ async function publishDev() {
   const existing = await existingResponse.json();
   if (!existingResponse.ok) throw new Error(`DEV lookup failed (${existingResponse.status}): ${JSON.stringify(existing)}`);
 
-  const match = existing.find(
-    (article) => sameUrl(article.canonical_url, canonical) || article.title === meta.title,
-  );
+  const match = existing.find((article) => sameUrl(article.canonical_url, canonical) || article.title === meta.title);
   if (match) {
     console.log(`DEV: already published at ${match.url}`);
     return;
@@ -114,21 +110,6 @@ async function publishHashnode() {
   const publicationId = process.env.HASHNODE_PUBLICATION_ID;
   if (!token || !publicationId) {
     console.log('HASHNODE_PAT/HASHNODE_PUBLICATION_ID not configured; skipping Hashnode syndication.');
-    return;
-  }
-
-  const existingQuery = `query Existing($publicationId: ObjectId!, $slug: String!) {
-    publication(id: $publicationId) {
-      post(slug: $slug) { id title url canonicalUrl }
-    }
-  }`;
-  const existingData = await hashnodeRequest(token, existingQuery, {
-    publicationId,
-    slug: meta.slug,
-  });
-  const existing = existingData.data.publication?.post;
-  if (existing) {
-    console.log(`Hashnode: already published at ${existing.url}`);
     return;
   }
 
