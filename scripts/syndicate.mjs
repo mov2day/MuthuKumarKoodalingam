@@ -105,34 +105,72 @@ async function hashnodeRequest(token, query, variables) {
   return data;
 }
 
+async function resolveHashnodePublication(token) {
+  const query = `query MeWithPublications {
+    me {
+      username
+      publications(first: 20) {
+        edges { node { id title url canonicalURL } }
+      }
+    }
+  }`;
+  const data = await hashnodeRequest(token, query, {});
+  const publications = data.data.me?.publications?.edges?.map((edge) => edge.node) || [];
+  if (!publications.length) throw new Error('Hashnode: authenticated user has no publications.');
+
+  const configured = process.env.HASHNODE_PUBLICATION_ID;
+  const byConfiguredId = configured && publications.find((p) => p.id === configured);
+  if (byConfiguredId) return byConfiguredId;
+
+  const byDomain = publications.find((p) =>
+    [p.url, p.canonicalURL].filter(Boolean).some((url) => url.includes('muthukumarkoodalingam')),
+  );
+  if (byDomain) return byDomain;
+
+  if (publications.length === 1) return publications[0];
+
+  console.log(`Hashnode: ${publications.length} publications found; using the first owned publication: ${publications[0].title}`);
+  return publications[0];
+}
+
 async function publishHashnode() {
   const token = process.env.HASHNODE_PAT;
-  const publicationId = process.env.HASHNODE_PUBLICATION_ID;
-  if (!token || !publicationId) {
-    console.log('HASHNODE_PAT/HASHNODE_PUBLICATION_ID not configured; skipping Hashnode syndication.');
+  if (!token) {
+    console.log('HASHNODE_PAT not configured; skipping Hashnode syndication.');
     return;
   }
+
+  const publication = await resolveHashnodePublication(token);
+  console.log(`Hashnode: resolved publication ${publication.title} (${publication.id})`);
 
   const publishQuery = `mutation PublishPost($input: PublishPostInput!) {
     publishPost(input: $input) { post { id slug url title } }
   }`;
 
-  const data = await hashnodeRequest(token, publishQuery, {
-    input: {
-      publicationId,
-      title: meta.title,
-      subtitle: meta.description || undefined,
-      slug: meta.slug,
-      contentMarkdown: body,
-      originalArticleURL: canonical,
-      tags: rawTags.map((slug) => ({ slug })),
-      metaTitle: meta.title,
-      metaDescription: meta.description || undefined,
-      enableToc: true,
-    },
-  });
-
-  console.log(`Hashnode: ${data.data.publishPost.post.url}`);
+  try {
+    const data = await hashnodeRequest(token, publishQuery, {
+      input: {
+        publicationId: publication.id,
+        title: meta.title,
+        subtitle: meta.description || undefined,
+        slug: meta.slug,
+        contentMarkdown: body,
+        originalArticleURL: canonical,
+        tags: rawTags.map((slug) => ({ slug })),
+        metaTitle: meta.title,
+        metaDescription: meta.description || undefined,
+        enableToc: true,
+      },
+    });
+    console.log(`Hashnode: ${data.data.publishPost.post.url}`);
+  } catch (error) {
+    const message = String(error?.message || error);
+    if (/slug|already exists|duplicate/i.test(message)) {
+      console.log('Hashnode: article appears to be already published; treating duplicate slug as success.');
+      return;
+    }
+    throw error;
+  }
 }
 
 const results = await Promise.allSettled([publishDev(), publishHashnode()]);
