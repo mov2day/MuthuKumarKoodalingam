@@ -100,6 +100,9 @@ export function Portfolio() {
           <a href="#experience" className="transition-colors hover:text-accent">
             Experience
           </a>
+          <a href="/blog/" className="transition-colors hover:text-accent">
+            Notes
+          </a>
           <a
             href="#contact"
             className="bg-foreground px-3 py-1 text-background transition-colors hover:bg-accent"
@@ -107,12 +110,20 @@ export function Portfolio() {
             Contact
           </a>
         </div>
-        <a
-          href="#contact"
-          className="bg-foreground px-3 py-1.5 font-mono text-[10px] tracking-widest text-background uppercase transition-colors hover:bg-accent md:hidden"
-        >
-          Contact
-        </a>
+        <div className="flex items-center gap-3 md:hidden">
+          <a
+            href="/blog/"
+            className="font-mono text-[10px] tracking-widest uppercase transition-colors hover:text-accent"
+          >
+            Notes
+          </a>
+          <a
+            href="#contact"
+            className="bg-foreground px-3 py-1.5 font-mono text-[10px] tracking-widest text-background uppercase transition-colors hover:bg-accent"
+          >
+            Contact
+          </a>
+        </div>
       </nav>
 
       <main id="content">
@@ -343,6 +354,9 @@ export function Portfolio() {
                 className="text-sm hover:text-accent"
               >
                 GitHub
+              </a>
+              <a href="/blog/" className="text-sm hover:text-accent">
+                Engineering Notes
               </a>
             </div>
             <div className="flex flex-col">
