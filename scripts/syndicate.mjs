@@ -26,19 +26,63 @@ function sameUrl(a, b) {
   return a.replace(/\/$/, '') === b.replace(/\/$/, '');
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const { meta, body } = parseFrontmatter(source);
 if (meta.published === 'false') {
   console.log(`Skipping unpublished article ${file}`);
   process.exit(0);
 }
+if (!meta.slug || !meta.title) throw new Error(`Published article ${file} must define slug and title.`);
 
 const canonical = `${site}/blog/${meta.slug}/`;
+const sourceAttribution = `Originally published at [muthukumarkoodalingam.com](${canonical}).`;
+const syndicatedBody = body.includes(sourceAttribution)
+  ? body
+  : `${body}\n\n---\n\n${sourceAttribution}`;
 const rawTags = (meta.tags || 'testing,api')
   .split(',')
   .map((tag) => tag.trim().toLowerCase())
   .filter(Boolean)
   .slice(0, 4);
 const devTags = rawTags.map((tag) => tag.replace(/[^a-z0-9]/g, '')).filter(Boolean);
+
+async function verifyCanonicalSource() {
+  const attempts = Number(process.env.SOURCE_VERIFY_ATTEMPTS || 24);
+  const delayMs = Number(process.env.SOURCE_VERIFY_DELAY_MS || 5000);
+  let lastProblem = 'source not checked';
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const response = await fetch(canonical, {
+        redirect: 'follow',
+        headers: { 'User-Agent': 'muthukumarkoodalingam-syndication-verifier/1.0' },
+      });
+      const html = await response.text();
+      const canonicalLink = html.match(/<link\b[^>]*\brel=["']canonical["'][^>]*\bhref=["']([^"']+)["'][^>]*>/i);
+
+      if (response.ok && canonicalLink && sameUrl(canonicalLink[1], canonical)) {
+        console.log(`Canonical source verified: ${canonical}`);
+        return;
+      }
+
+      lastProblem = `HTTP ${response.status}; canonical=${canonicalLink?.[1] || 'missing'}`;
+    } catch (error) {
+      lastProblem = String(error?.message || error);
+    }
+
+    if (attempt < attempts) {
+      console.log(`Canonical source not ready (${attempt}/${attempts}): ${lastProblem}`);
+      await sleep(delayMs);
+    }
+  }
+
+  throw new Error(
+    `Refusing to syndicate before the first-party article is live with a self-canonical URL. ${canonical} (${lastProblem})`,
+  );
+}
 
 async function publishDev() {
   const token = process.env.DEVTO_API_KEY;
@@ -59,7 +103,21 @@ async function publishDev() {
 
   const match = existing.find((article) => sameUrl(article.canonical_url, canonical) || article.title === meta.title);
   if (match) {
-    console.log(`DEV: already published at ${match.url}`);
+    if (sameUrl(match.canonical_url, canonical)) {
+      console.log(`DEV: already published with correct canonical at ${match.url}`);
+      return;
+    }
+
+    const repairResponse = await fetch(`https://dev.to/api/articles/${match.id}`, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify({ article: { canonical_url: canonical } }),
+    });
+    const repairData = await repairResponse.json();
+    if (!repairResponse.ok) {
+      throw new Error(`DEV canonical repair failed (${repairResponse.status}): ${JSON.stringify(repairData)}`);
+    }
+    console.log(`DEV: repaired canonical for ${repairData.url || match.url} → ${canonical}`);
     return;
   }
 
@@ -71,7 +129,7 @@ async function publishDev() {
         title: meta.title,
         description: meta.description,
         published: true,
-        body_markdown: body,
+        body_markdown: syndicatedBody,
         tags: devTags,
         canonical_url: canonical,
       },
@@ -158,7 +216,7 @@ async function publishHashnode() {
         title: meta.title,
         subtitle: meta.description || undefined,
         slug: meta.slug,
-        contentMarkdown: body,
+        contentMarkdown: syndicatedBody,
         originalArticleURL: canonical,
         tags: rawTags.map((slug) => ({ slug })),
         metaTitle: meta.title,
@@ -180,6 +238,8 @@ async function publishHashnode() {
     throw error;
   }
 }
+
+await verifyCanonicalSource();
 
 const results = await Promise.allSettled([publishDev(), publishHashnode()]);
 const failures = results.filter((result) => result.status === 'rejected');
