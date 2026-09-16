@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "node scripts/generate-blog.mjs && node scripts/generate-seo.mjs && vite build",
     "seo:generate": "node scripts/generate-blog.mjs && node scripts/generate-seo.mjs",
+    "seo:check": "node scripts/check-seo.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
