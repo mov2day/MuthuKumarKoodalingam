@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Karate Test Management for VS Code | Muthu Kumar Koodalingam</title>
+    <meta name="description" content="Karate Test Management is a VS Code workspace for creating, running, analysing and maintaining Karate API tests with OpenAPI coverage, execution history and optional AI-assisted workflows." />
+    <meta name="author" content="Muthu Kumar Koodalingam" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <link rel="canonical" href="https://muthukumarkoodalingam.com/projects/karate-test-management/" />
+    <link rel="author" href="https://muthukumarkoodalingam.com/about/" />
+    <meta property="og:title" content="Karate Test Management for VS Code" />
+    <meta property="og:description" content="Create, run, analyse and maintain Karate API tests with OpenAPI-aware coverage and project-aware execution." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://muthukumarkoodalingam.com/projects/karate-test-management/" />
+    <meta property="og:site_name" content="Muthu Kumar Koodalingam" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Karate Test Management for VS Code" />
+    <meta name="twitter:description" content="A VS Code workspace for Karate API test creation, execution, coverage, quality and maintenance." />
+    <link rel="stylesheet" href="/projects/project.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://muthukumarkoodalingam.com/projects/karate-test-management/#software",
+            "name": "Karate Test Management",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Cross-platform",
+            "description": "A VS Code workspace for creating, running, analysing and maintaining Karate API tests with OpenAPI-aware coverage and optional AI-assisted workflows.",
+            "url": "https://muthukumarkoodalingam.com/projects/karate-test-management/",
+            "codeRepository": "https://github.com/mov2day/KaratePlugin",
+            "author": { "@id": "https://muthukumarkoodalingam.com/#person" },
+            "keywords": ["Karate DSL", "API testing", "OpenAPI", "VS Code", "test automation", "API coverage"]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://muthukumarkoodalingam.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://muthukumarkoodalingam.com/#projects" },
+              { "@type": "ListItem", "position": 3, "name": "Karate Test Management", "item": "https://muthukumarkoodalingam.com/projects/karate-test-management/" }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <nav aria-label="Primary"><div class="nav"><a class="brand" href="/">Muthu Kumar</a><div class="nav-links"><a href="/">Home</a><a href="/about/">About</a><a href="/#projects">Projects</a><a href="/karate-api-testing/">Karate</a><a href="/blog/">Notes</a></div></div></nav>
+    <main>
+      <div class="eyebrow">Open source · VS Code · Karate DSL</div>
+      <h1>Karate Test Management</h1>
+      <p class="lede">A VS Code workspace that brings Karate API test creation, execution, coverage, quality analysis and maintenance into one place.</p>
+      <div class="summary"><strong>The problem:</strong> mature Karate suites need more than code generation. Teams need to understand what exists, run the right scenarios, map tests to the API contract, investigate failures, manage gaps and keep generated changes aligned with the repository.</div>
+
+      <h2>What it brings together</h2>
+      <div class="grid">
+        <div class="card"><h3>Create and import</h3><p>Build Karate tests from OpenAPI, Postman, HAR, GraphQL, documentation and recorded workflows, with deterministic generation available without AI.</p></div>
+        <div class="card"><h3>Project-aware execution</h3><p>Run features or exact scenarios using discovered Maven, Gradle, standalone or explicitly configured project runners.</p></div>
+        <div class="card"><h3>Contract coverage</h3><p>Compare OpenAPI operations with available feature evidence, review covered and uncovered endpoints, and generate from confirmed gaps.</p></div>
+        <div class="card"><h3>Test management</h3><p>Browse a searchable scenario library, run history, ownership, lifecycle status, quality findings and traceability information.</p></div>
+        <div class="card"><h3>Quality workflows</h3><p>Track coverage gaps, specification changes, flakiness, failures and health findings through an explicit review lifecycle.</p></div>
+        <div class="card"><h3>Optional AI assistance</h3><p>Use a selected provider for bounded generation, repair and analysis while keeping deterministic execution, coverage and management available independently.</p></div>
+      </div>
+
+      <h2>Evidence-first design</h2>
+      <p>The design separates signals that are easy to conflate: a passing scenario is execution evidence, while OpenAPI operation mapping is coverage evidence. AI-assisted changes are treated as proposals to validate rather than a replacement for repository-aware rules.</p>
+      <div class="flow">API contract + repository context
+        ↓
+Discover existing scenarios and project runners
+        ↓
+Generate / import / execute
+        ↓
+Map evidence to OpenAPI operations
+        ↓
+Track gaps, failures and maintenance work</div>
+
+      <h2>Related work</h2>
+      <p>The project is closely connected to my writing on maintainable OpenAPI-to-Karate generation and contract-level API coverage.</p>
+      <div class="links">
+        <a class="button primary" href="https://github.com/mov2day/KaratePlugin">Source on GitHub</a>
+        <a class="button" href="https://marketplace.visualstudio.com/items?itemName=MuthuKumarKoodalingam.karate-test-generator">VS Code Marketplace</a>
+        <a class="button" href="/karate-api-testing/">Karate API testing guide</a>
+        <a class="button" href="/blog/">Engineering notes</a>
+      </div>
+    </main>
+    <footer>Karate DSL · OpenAPI · API test management · Quality engineering</footer>
+  </body>
+</html>
