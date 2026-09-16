@@ -7,6 +7,29 @@ const contentDir = path.join(root, 'content', 'karate');
 const publicDir = path.join(root, 'public');
 const blogDir = path.join(publicDir, 'blog');
 
+const projectPages = [
+  {
+    name: 'Karate Test Management',
+    path: '/projects/karate-test-management/',
+    description: 'VS Code workspace for creating, running, analysing and maintaining Karate API tests with OpenAPI-aware coverage.',
+  },
+  {
+    name: 'UnifiedTest',
+    path: '/projects/unifiedtest/',
+    description: 'Gradle plugin for Java test reporting, OpenTelemetry observability and test-management evidence.',
+  },
+  {
+    name: 'AssertIQ',
+    path: '/projects/assertiq/',
+    description: 'Static test intelligence and CI quality gates for JavaScript, TypeScript and pytest test suites.',
+  },
+  {
+    name: 'QE-MCP',
+    path: '/projects/qe-mcp/',
+    description: 'Strategy-driven MCP server for repository-aware test planning, generated-test validation and quality enforcement.',
+  },
+];
+
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -161,6 +184,7 @@ const sitemapEntries = [
   `  <url><loc>${site}/</loc></url>`,
   `  <url><loc>${site}/about/</loc></url>`,
   `  <url><loc>${site}/karate-api-testing/</loc></url>`,
+  ...projectPages.map((project) => `  <url><loc>${site}${project.path}</loc></url>`),
   `  <url><loc>${site}/blog/</loc></url>`,
   ...posts.map((post) => {
     const lastmod = post.updated || post.date;
@@ -177,9 +201,13 @@ const llmsPosts = posts
   .map((post) => `- [${post.title}](${site}/blog/${post.slug}/): ${post.description || ''}`)
   .join('\n');
 
+const llmsProjects = projectPages
+  .map((project) => `- [${project.name}](${site}${project.path}): ${project.description}`)
+  .join('\n');
+
 fs.writeFileSync(
   path.join(publicDir, 'llms.txt'),
-  `# Muthu Kumar Koodalingam\n\n> Engineering portfolio and technical writing focused on quality engineering, test automation, API testing, test architecture, developer tooling and trustworthy AI-assisted software testing.\n\n## Primary topics\n\n- Quality engineering and test automation architecture\n- API testing with Karate DSL and OpenAPI\n- Mobile test automation\n- CI/CD quality gates, observability and release evidence\n- AI-assisted testing, agent guardrails and engineering workflows\n- Open-source QA and developer tooling\n\n## Topic hubs\n\n- [Karate API Testing with OpenAPI](${site}/karate-api-testing/): Maintainable generation, operation coverage, gap analysis and evidence-first AI-assisted API testing.\n\n## Engineering notes\n\n${llmsPosts || '- [Engineering Notes](' + site + '/blog/)'}\n\n## Open-source projects\n\n- [Karate Test Generator](https://github.com/mov2day/KaratePlugin): OpenAPI and Postman to maintainable Karate API tests, coverage analysis and maintenance workflows.\n- [UnifiedTest](https://github.com/mov2day/UnifiedTest): Unified Java test reporting and release evidence.\n- [AssertIQ](https://github.com/mov2day/assertiq): Static analysis for JavaScript and TypeScript test suites.\n- [QE-MCP](https://github.com/mov2day/Andriod-test-mcp): Repository-aware quality engineering support for coding agents.\n\n## Identity\n\n- [About Muthu Kumar Koodalingam](${site}/about/)\n- [Portfolio](${site}/)\n- [GitHub](https://github.com/mov2day)\n- [LinkedIn](https://www.linkedin.com/in/muthukumark12/)\n\n## Feeds and discovery\n\n- [RSS](${site}/rss.xml)\n- [Sitemap](${site}/sitemap.xml)\n`,
+  `# Muthu Kumar Koodalingam\n\n> Engineering portfolio and technical writing focused on quality engineering, test automation, API testing, test architecture, developer tooling and trustworthy AI-assisted software testing.\n\n## Primary topics\n\n- Quality engineering and test automation architecture\n- API testing with Karate DSL and OpenAPI\n- Mobile test automation\n- CI/CD quality gates, observability and release evidence\n- AI-assisted testing, agent guardrails and engineering workflows\n- Open-source QA and developer tooling\n\n## Topic hubs\n\n- [Karate API Testing with OpenAPI](${site}/karate-api-testing/): Maintainable generation, operation coverage, gap analysis and evidence-first AI-assisted API testing.\n\n## Engineering notes\n\n${llmsPosts || '- [Engineering Notes](' + site + '/blog/)'}\n\n## Open-source projects\n\n${llmsProjects}\n\n## Identity\n\n- [About Muthu Kumar Koodalingam](${site}/about/)\n- [Portfolio](${site}/)\n- [GitHub](https://github.com/mov2day)\n- [LinkedIn](https://www.linkedin.com/in/muthukumark12/)\n\n## Feeds and discovery\n\n- [RSS](${site}/rss.xml)\n- [Sitemap](${site}/sitemap.xml)\n`,
 );
 
 console.log(`Generated SEO metadata for ${posts.length} post(s), sitemap.xml and llms.txt.`);

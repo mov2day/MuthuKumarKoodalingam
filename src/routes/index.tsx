@@ -3,33 +3,33 @@ const projects = [
     no: "01",
     name: "UnifiedTest",
     title: "One test run. Every signal connected.",
-    body: "A Gradle plugin that turns Java test output into traceable release evidence across HTML reports, OpenTelemetry and test management.",
-    tags: ["Java / Gradle", "JUnit · TestNG · Spock", "OTLP"],
-    href: "https://github.com/mov2day/UnifiedTest",
+    body: "A Gradle plugin that turns Java test output into structured reports, OpenTelemetry signals and test-management evidence.",
+    tags: ["Java / Gradle", "JUnit · TestNG", "OpenTelemetry"],
+    href: "/projects/unifiedtest/",
   },
   {
     no: "02",
-    name: "Karate Test Generator",
-    title: "From API spec to useful tests — faster.",
-    body: "A VS Code extension that turns OpenAPI, Postman and documentation into maintainable Karate tests, then helps with coverage, bug hunting and CI repair.",
+    name: "Karate Test Management",
+    title: "From API spec to managed test evidence.",
+    body: "A VS Code workspace for creating, running, analysing and maintaining Karate API tests with OpenAPI coverage and project-aware execution.",
     tags: ["TypeScript", "OpenAPI · Postman", "Karate DSL"],
-    href: "https://github.com/mov2day/KaratePlugin",
+    href: "/projects/karate-test-management/",
   },
   {
     no: "03",
     name: "AssertIQ",
     title: "Find brittle tests before CI does.",
-    body: "Static analysis for JavaScript and TypeScript test suites, exposing risk early and giving CI a clear gate for new quality debt.",
-    tags: ["TypeScript / CLI", "HTML · JSON · SARIF", "GitHub Action"],
-    href: "https://github.com/mov2day/assertiq",
+    body: "Static test intelligence for JavaScript, TypeScript and pytest suites, with actionable findings and CI gates for new quality debt.",
+    tags: ["JS · TS · pytest", "HTML · JSON · SARIF", "GitHub Action"],
+    href: "/projects/assertiq/",
   },
   {
     no: "04",
     name: "QE-MCP",
     title: "Give coding agents a quality conscience.",
-    body: "An MCP server that grounds agents in repository-aware test plans, layered validation and strategy-based quality gates.",
-    tags: ["Python / FastMCP", "Pytest · Compose", "Quality gates"],
-    href: "https://github.com/mov2day/Andriod-test-mcp",
+    body: "An MCP server that grounds coding agents in repository-aware test plans, layered validation and strategy-based quality gates.",
+    tags: ["Python / FastMCP", "pytest · Compose", "Quality gates"],
+    href: "/projects/qe-mcp/",
   },
 ];
 
@@ -91,6 +91,9 @@ export function Portfolio() {
           Muthu Kumar
         </a>
         <div className="hidden gap-8 font-mono text-xs tracking-widest uppercase md:flex">
+          <a href="/about/" className="transition-colors hover:text-accent">
+            About
+          </a>
           <a href="#projects" className="transition-colors hover:text-accent">
             Projects
           </a>
@@ -111,6 +114,12 @@ export function Portfolio() {
           </a>
         </div>
         <div className="flex items-center gap-3 md:hidden">
+          <a
+            href="/about/"
+            className="font-mono text-[10px] tracking-widest uppercase transition-colors hover:text-accent"
+          >
+            About
+          </a>
           <a
             href="/blog/"
             className="font-mono text-[10px] tracking-widest uppercase transition-colors hover:text-accent"
@@ -207,8 +216,6 @@ export function Portfolio() {
               <a
                 key={p.no}
                 href={p.href}
-                target="_blank"
-                rel="noreferrer"
                 className="project-card group relative flex h-full flex-col overflow-hidden bg-background p-6 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-secondary focus-visible:z-10 md:p-10"
               >
                 <span className="mb-4 block font-mono text-xs text-accent">
@@ -227,7 +234,7 @@ export function Portfolio() {
                   ))}
                 </div>
                 <span className="project-arrow" aria-hidden="true">
-                  ↗
+                  →
                 </span>
               </a>
             ))}
@@ -339,6 +346,9 @@ export function Portfolio() {
               <span className="mb-2 font-mono text-[10px] text-muted-foreground uppercase">
                 Socials
               </span>
+              <a href="/about/" className="text-sm hover:text-accent">
+                About
+              </a>
               <a
                 href="https://www.linkedin.com/in/muthukumark12/"
                 target="_blank"

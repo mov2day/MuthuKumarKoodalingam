@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>UnifiedTest | Java Test Observability & Reporting</title>
+    <meta name="description" content="UnifiedTest is a Gradle plugin for Java test observability and reporting across JUnit and TestNG, with HTML/JSON reports, OpenTelemetry export and test-management integration." />
+    <meta name="author" content="Muthu Kumar Koodalingam" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <link rel="canonical" href="https://muthukumarkoodalingam.com/projects/unifiedtest/" />
+    <link rel="author" href="https://muthukumarkoodalingam.com/about/" />
+    <meta property="og:title" content="UnifiedTest | Java Test Observability & Reporting" />
+    <meta property="og:description" content="Connect Java test execution to useful reports, telemetry and test-management signals through a Gradle plugin." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://muthukumarkoodalingam.com/projects/unifiedtest/" />
+    <meta property="og:site_name" content="Muthu Kumar Koodalingam" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="UnifiedTest" />
+    <meta name="twitter:description" content="A Gradle plugin for Java test observability, reporting and telemetry." />
+    <link rel="stylesheet" href="/projects/project.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://muthukumarkoodalingam.com/projects/unifiedtest/#software",
+            "name": "UnifiedTest",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Cross-platform",
+            "description": "A Gradle plugin for Java test observability and reporting with structured reports, OpenTelemetry export and extensibility.",
+            "url": "https://muthukumarkoodalingam.com/projects/unifiedtest/",
+            "codeRepository": "https://github.com/mov2day/UnifiedTest",
+            "programmingLanguage": "Java",
+            "author": { "@id": "https://muthukumarkoodalingam.com/#person" },
+            "keywords": ["JUnit", "TestNG", "Gradle", "OpenTelemetry", "test reporting", "test observability"]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://muthukumarkoodalingam.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://muthukumarkoodalingam.com/#projects" },
+              { "@type": "ListItem", "position": 3, "name": "UnifiedTest", "item": "https://muthukumarkoodalingam.com/projects/unifiedtest/" }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <nav aria-label="Primary"><div class="nav"><a class="brand" href="/">Muthu Kumar</a><div class="nav-links"><a href="/">Home</a><a href="/about/">About</a><a href="/#projects">Projects</a><a href="/blog/">Notes</a></div></div></nav>
+    <main>
+      <div class="eyebrow">Open source · Java · Gradle</div>
+      <h1>UnifiedTest</h1>
+      <p class="lede">A Gradle plugin for turning Java test execution into structured reporting and observability signals that are easier to use in local development and CI.</p>
+      <div class="summary"><strong>The problem:</strong> test frameworks can execute well while leaving results fragmented across console output, local reports, telemetry systems and test-management platforms. UnifiedTest provides a common reporting and extension layer around that execution.</div>
+
+      <h2>Core capabilities</h2>
+      <div class="grid">
+        <div class="card"><h3>Framework detection</h3><p>Supports common Java test execution paths including JUnit 4, JUnit 5 and TestNG, with framework-aware result collection.</p></div>
+        <div class="card"><h3>Readable reporting</h3><p>Produces console feedback plus structured JSON and HTML reports so results work for both people and downstream tooling.</p></div>
+        <div class="card"><h3>OpenTelemetry export</h3><p>Exports per-test observability data to OTLP endpoints for correlation with systems such as collectors and trace backends.</p></div>
+        <div class="card"><h3>Extensible architecture</h3><p>Uses an SPI model so additional reporting, rendering or observability behavior can be added without replacing the core plugin.</p></div>
+        <div class="card"><h3>Test-management integration</h3><p>Includes integration patterns for systems such as Zephyr and TestRail, including mapping and batched result submission.</p></div>
+        <div class="card"><h3>CI-oriented evidence</h3><p>Provides machine-readable outputs that can support gates, dashboards and release evidence beyond a single green/red test result.</p></div>
+      </div>
+
+      <h2>Why I built it</h2>
+      <p>Execution is only one part of a useful test system. Teams also need to know what ran, how long it took, where failures occurred and how that evidence connects to the rest of the engineering delivery system. UnifiedTest explores a common layer for carrying those signals out of the test framework.</p>
+      <div class="links">
+        <a class="button primary" href="https://github.com/mov2day/UnifiedTest">Source on GitHub</a>
+        <a class="button" href="/about/">About the author</a>
+      </div>
+    </main>
+    <footer>Java · Gradle · Test reporting · OpenTelemetry</footer>
+  </body>
+</html>

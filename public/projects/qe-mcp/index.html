@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>QE-MCP | Quality Enforcement for AI Coding Agents</title>
+    <meta name="description" content="QE-MCP is a strategy-driven Model Context Protocol server that helps AI coding agents analyse repositories, plan tests, validate generated tests and enforce repository-specific quality gates." />
+    <meta name="author" content="Muthu Kumar Koodalingam" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <link rel="canonical" href="https://muthukumarkoodalingam.com/projects/qe-mcp/" />
+    <link rel="author" href="https://muthukumarkoodalingam.com/about/" />
+    <meta property="og:title" content="QE-MCP | Quality Enforcement for AI Coding Agents" />
+    <meta property="og:description" content="Repository-aware test planning, validation and strategy-based quality gates exposed through MCP." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://muthukumarkoodalingam.com/projects/qe-mcp/" />
+    <meta property="og:site_name" content="Muthu Kumar Koodalingam" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="QE-MCP" />
+    <meta name="twitter:description" content="Strategy-driven quality enforcement for AI coding agents through MCP." />
+    <link rel="stylesheet" href="/projects/project.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://muthukumarkoodalingam.com/projects/qe-mcp/#software",
+            "name": "QE-MCP",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Cross-platform",
+            "description": "A Python Model Context Protocol server for repository-aware test analysis, prescriptive test planning, generated-test validation and quality enforcement.",
+            "url": "https://muthukumarkoodalingam.com/projects/qe-mcp/",
+            "codeRepository": "https://github.com/mov2day/Andriod-test-mcp",
+            "programmingLanguage": "Python",
+            "author": { "@id": "https://muthukumarkoodalingam.com/#person" },
+            "keywords": ["Model Context Protocol", "MCP", "AI coding agents", "quality gates", "test generation", "Android Compose", "pytest"]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://muthukumarkoodalingam.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://muthukumarkoodalingam.com/#projects" },
+              { "@type": "ListItem", "position": 3, "name": "QE-MCP", "item": "https://muthukumarkoodalingam.com/projects/qe-mcp/" }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <nav aria-label="Primary"><div class="nav"><a class="brand" href="/">Muthu Kumar</a><div class="nav-links"><a href="/">Home</a><a href="/about/">About</a><a href="/#projects">Projects</a><a href="/blog/">Notes</a></div></div></nav>
+    <main>
+      <div class="eyebrow">Open source · MCP · AI quality engineering</div>
+      <h1>QE-MCP</h1>
+      <p class="lede">A strategy-driven Model Context Protocol server that gives coding agents repository-specific rules for analysing test gaps, planning tests, validating generated code and enforcing quality gates.</p>
+      <div class="summary"><strong>The problem:</strong> an AI agent can generate syntactically valid tests while missing the repository's architecture, test lanes, naming conventions, coverage expectations or assertion rules. QE-MCP puts a prescriptive quality strategy between the agent and acceptance.</div>
+
+      <h2>Quality workflow</h2>
+      <div class="flow">Load repository-specific strategy
+        ↓
+Analyse source files and existing tests
+        ↓
+Identify gaps and build a prescriptive test plan
+        ↓
+Provide a strategy-aware generation brief
+        ↓
+Validate generated tests across multiple rule layers
+        ↓
+Enforce repository quality gates</div>
+
+      <h2>Core capabilities</h2>
+      <div class="grid">
+        <div class="card"><h3>Repository analysis</h3><p>Pairs source and test files, identifies gaps and prepares structured context for deeper agent analysis.</p></div>
+        <div class="card"><h3>Prescriptive test planning</h3><p>Creates explicit test cases and behavioral specifications rather than asking the model to invent an unconstrained suite.</p></div>
+        <div class="card"><h3>Generation briefs</h3><p>Assembles strategy-specific instructions that tell an agent how tests should fit the repository's expected architecture and conventions.</p></div>
+        <div class="card"><h3>Layered validation</h3><p>Checks generated tests for syntax, naming, specification completeness, assertions, lane compliance, unsafe bare assertions and skip limits.</p></div>
+        <div class="card"><h3>Hard enforcement</h3><p>Combines analysis and validation into an acceptance gate that can fail when required coverage or architectural rules are not met.</p></div>
+        <div class="card"><h3>Change-focused analysis</h3><p>Includes dependency and diff-oriented analysis capabilities so enforcement can be focused on changed code where appropriate.</p></div>
+      </div>
+
+      <h2>Strategy-based instead of prompt-only</h2>
+      <p>QE-MCP separates quality policy from an individual model prompt. Built-in strategies include Python/pytest rules and an Android Compose strategy with distinct test lanes and source classification. Custom strategies can extend the same mechanism for other repositories.</p>
+      <p>The intent is not to make an agent autonomous by default. It is to make the evidence and rules around generated tests explicit enough that an agent's output can be checked before it is accepted.</p>
+      <div class="links">
+        <a class="button primary" href="https://github.com/mov2day/Andriod-test-mcp">Source on GitHub</a>
+        <a class="button" href="/about/">About the author</a>
+      </div>
+    </main>
+    <footer>MCP · AI coding agents · Test strategy · Quality gates</footer>
+  </body>
+</html>
