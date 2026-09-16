@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AssertIQ | Static Test Intelligence for JS, TypeScript & pytest</title>
+    <meta name="description" content="AssertIQ statically analyses JavaScript, TypeScript and pytest test suites for assertion quality, flakiness risk, isolation risk, naming clarity, coverage balance and dead-test risk." />
+    <meta name="author" content="Muthu Kumar Koodalingam" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <link rel="canonical" href="https://muthukumarkoodalingam.com/projects/assertiq/" />
+    <link rel="author" href="https://muthukumarkoodalingam.com/about/" />
+    <meta property="og:title" content="AssertIQ | Static Test Intelligence" />
+    <meta property="og:description" content="Static risk analysis and quality gates for JavaScript, TypeScript and pytest test suites." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://muthukumarkoodalingam.com/projects/assertiq/" />
+    <meta property="og:site_name" content="Muthu Kumar Koodalingam" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="AssertIQ" />
+    <meta name="twitter:description" content="Static test intelligence and CI quality gates for JavaScript, TypeScript and pytest suites." />
+    <link rel="stylesheet" href="/projects/project.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://muthukumarkoodalingam.com/projects/assertiq/#software",
+            "name": "AssertIQ",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Cross-platform",
+            "description": "Static test intelligence and report cards for JavaScript, TypeScript and pytest test suites, with CI gates and machine-readable reporting.",
+            "url": "https://muthukumarkoodalingam.com/projects/assertiq/",
+            "codeRepository": "https://github.com/mov2day/assertiq",
+            "author": { "@id": "https://muthukumarkoodalingam.com/#person" },
+            "keywords": ["test quality", "static analysis", "JavaScript testing", "TypeScript testing", "pytest", "SARIF", "CI quality gate"]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://muthukumarkoodalingam.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://muthukumarkoodalingam.com/#projects" },
+              { "@type": "ListItem", "position": 3, "name": "AssertIQ", "item": "https://muthukumarkoodalingam.com/projects/assertiq/" }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <nav aria-label="Primary"><div class="nav"><a class="brand" href="/">Muthu Kumar</a><div class="nav-links"><a href="/">Home</a><a href="/about/">About</a><a href="/#projects">Projects</a><a href="/blog/">Notes</a></div></div></nav>
+    <main>
+      <div class="eyebrow">Open source · Static analysis · Test quality</div>
+      <h1>AssertIQ</h1>
+      <p class="lede">Static test intelligence for JavaScript, TypeScript and pytest suites—designed to expose risky test patterns before a test runner has to fail.</p>
+      <div class="summary"><strong>The problem:</strong> a test suite can execute successfully while still containing weak assertions, isolation risks, brittle patterns or dead tests. AssertIQ parses test code directly and turns those signals into actionable findings and CI gates.</div>
+
+      <h2>What it analyses</h2>
+      <div class="grid">
+        <div class="card"><h3>Assertion quality</h3><p>Highlights tests with weak or missing verification signals so a green suite is less likely to hide tests that cannot meaningfully fail.</p></div>
+        <div class="card"><h3>Flakiness risk</h3><p>Flags static patterns associated with unstable tests without needing to repeatedly execute the suite.</p></div>
+        <div class="card"><h3>Isolation risk</h3><p>Surfaces coupling and state patterns that can make tests sensitive to execution order or shared behavior.</p></div>
+        <div class="card"><h3>Naming clarity</h3><p>Checks whether test names communicate useful behavioral intent rather than acting as opaque identifiers.</p></div>
+        <div class="card"><h3>Coverage balance</h3><p>Looks for structural imbalances in where tests exist, providing a complement to runtime code-coverage metrics.</p></div>
+        <div class="card"><h3>Dead-test risk</h3><p>Identifies static signals that suggest tests may no longer provide meaningful protection or may be disconnected from useful assertions.</p></div>
+      </div>
+
+      <h2>Built for local use and CI</h2>
+      <p>AssertIQ does not execute the test suite. It parses supported test files and can emit console results, JSON, HTML, badges, SARIF and dashboards. Baseline comparison enables gates on newly introduced risk instead of forcing teams to fix every historical issue before adopting the tool.</p>
+      <div class="flow">Parse test files
+        ↓
+Score quality dimensions and findings
+        ↓
+Compare with an optional baseline
+        ↓
+Emit human + machine-readable evidence
+        ↓
+Gate new quality debt in CI</div>
+
+      <h2>Supported workflows</h2>
+      <ul>
+        <li>JavaScript and TypeScript test-suite analysis.</li>
+        <li>Static pytest analysis, including common pytest test files, fixtures, marks and parameterized tests.</li>
+        <li>GitHub Action integration with configurable thresholds.</li>
+        <li>SARIF output for code-scanning workflows.</li>
+        <li>Trend history and dashboard generation.</li>
+        <li>Rule configuration and explicit suppressions for intentional findings.</li>
+      </ul>
+      <div class="links">
+        <a class="button primary" href="https://github.com/mov2day/assertiq">Source on GitHub</a>
+        <a class="button" href="/about/">About the author</a>
+      </div>
+    </main>
+    <footer>Static analysis · Test quality · JavaScript · TypeScript · pytest</footer>
+  </body>
+</html>
