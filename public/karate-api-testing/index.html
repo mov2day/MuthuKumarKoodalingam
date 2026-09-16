@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Karate API Testing with OpenAPI | Coverage, Generation & Maintainability</title>
+    <meta
+      name="description"
+      content="A practical guide to Karate API testing with OpenAPI: generate maintainable tests, measure operation coverage, find gaps and use AI without losing deterministic evidence."
+    />
+    <meta name="author" content="Muthu Kumar Koodalingam" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <link rel="canonical" href="https://muthukumarkoodalingam.com/karate-api-testing/" />
+    <link rel="author" href="https://muthukumarkoodalingam.com/about/" />
+    <link rel="alternate" type="application/rss+xml" title="Muthu Kumar Koodalingam — Engineering Notes" href="https://muthukumarkoodalingam.com/rss.xml" />
+    <meta property="og:title" content="Karate API Testing with OpenAPI | Coverage, Generation & Maintainability" />
+    <meta property="og:description" content="How to combine Karate, OpenAPI, deterministic generation and operation coverage into maintainable API test engineering." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://muthukumarkoodalingam.com/karate-api-testing/" />
+    <meta property="og:site_name" content="Muthu Kumar Koodalingam" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Karate API Testing with OpenAPI" />
+    <meta name="twitter:description" content="Maintainable generation, OpenAPI operation coverage and evidence-first AI-assisted API testing." />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "CollectionPage",
+            "@id": "https://muthukumarkoodalingam.com/karate-api-testing/#page",
+            "url": "https://muthukumarkoodalingam.com/karate-api-testing/",
+            "name": "Karate API Testing with OpenAPI",
+            "description": "Practical guidance on maintainable Karate API test generation, OpenAPI operation coverage and evidence-first AI-assisted testing.",
+            "inLanguage": "en",
+            "author": { "@id": "https://muthukumarkoodalingam.com/#person" },
+            "about": [
+              { "@type": "Thing", "name": "Karate DSL" },
+              { "@type": "Thing", "name": "API Testing" },
+              { "@type": "Thing", "name": "OpenAPI" },
+              { "@type": "Thing", "name": "Test Automation" },
+              { "@type": "Thing", "name": "API Test Coverage" }
+            ],
+            "hasPart": [
+              {
+                "@type": "BlogPosting",
+                "name": "How to Generate Karate API Tests from OpenAPI — Without Creating a Maintenance Nightmare",
+                "url": "https://muthukumarkoodalingam.com/blog/openapi-to-karate-without-maintenance-nightmare/"
+              },
+              {
+                "@type": "BlogPosting",
+                "name": "Your Karate Tests Are Green. But Is Your API Actually Covered?",
+                "url": "https://muthukumarkoodalingam.com/blog/karate-api-coverage-openapi-gaps/"
+              }
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://muthukumarkoodalingam.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Karate API Testing", "item": "https://muthukumarkoodalingam.com/karate-api-testing/" }
+            ]
+          }
+        ]
+      }
+    </script>
+    <style>
+      :root{color-scheme:dark;--bg:#101215;--panel:#171a1f;--text:#f5f5f0;--muted:#a7adb6;--line:#2b3038;--accent:#5ed49a}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:17px/1.72 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent)}nav{position:sticky;top:0;z-index:2;border-bottom:1px solid var(--line);background:rgba(16,18,21,.92);backdrop-filter:blur(14px)}.nav{max-width:1120px;margin:auto;padding:15px 24px;display:flex;align-items:center;justify-content:space-between;gap:28px}.brand{font-size:14px;font-weight:700;text-decoration:none;color:var(--text)}.nav-links{display:flex;gap:22px;font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase}.nav-links a{text-decoration:none;color:var(--muted)}.nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--text)}main{max-width:900px;margin:auto;padding:72px 24px 96px}.eyebrow{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(44px,7vw,76px);line-height:.98;letter-spacing:-.055em;margin:18px 0 28px}h2{font-size:30px;line-height:1.15;letter-spacing:-.03em;margin-top:58px}h3{font-size:21px;margin-top:30px}.lede{font-size:22px;color:var(--muted);max-width:790px}.answer{padding:24px;border-left:3px solid var(--accent);background:var(--panel);margin:32px 0}.answer strong{color:var(--text)}.principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}.card{padding:22px;border:1px solid var(--line);background:var(--panel);border-radius:12px}.card h3{margin:0 0 10px;font-size:18px}.card p{margin:0;color:var(--muted);font-size:15px}.article-list{display:grid;gap:14px;margin-top:24px}.article-card{display:block;padding:24px;border:1px solid var(--line);background:var(--panel);border-radius:12px;text-decoration:none;color:var(--text)}.article-card:hover{border-color:var(--accent)}.article-card span{font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.article-card h3{margin:8px 0 8px}.article-card p{margin:0;color:var(--muted)}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--panel);padding:2px 6px;border-radius:5px}.flow{padding:20px;border:1px solid var(--line);background:#0a0c0f;border-radius:10px;font:14px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;overflow:auto}.cta{margin-top:58px;padding:26px;border:1px solid var(--line);background:var(--panel);border-radius:12px}.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}.button{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase}.button.primary{background:var(--text);color:var(--bg);border-color:var(--text)}footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center;color:var(--muted);font-size:13px}@media(max-width:700px){.nav{align-items:flex-start;flex-direction:column;gap:10px}.nav-links{width:100%;overflow-x:auto;gap:14px}.principles{grid-template-columns:1fr}main{padding-top:50px}}
+    </style>
+  </head>
+  <body>
+    <nav aria-label="Primary">
+      <div class="nav">
+        <a class="brand" href="/">Muthu Kumar</a>
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/about/">About</a>
+          <a href="/karate-api-testing/" aria-current="page">Karate</a>
+          <a href="/blog/">Notes</a>
+          <a href="https://github.com/mov2day/KaratePlugin" target="_blank" rel="noreferrer">Tool ↗</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="eyebrow">Karate · OpenAPI · API Test Engineering</div>
+      <h1>Karate API testing that stays useful after the demo.</h1>
+      <p class="lede">
+        Karate is effective for readable API automation, but the difficult part is not writing <code>Given / When / Then</code>. The difficult part is building a suite that maps to the API contract, fits repository conventions, exposes coverage gaps and remains maintainable as the API changes.
+      </p>
+
+      <div class="answer">
+        <strong>A practical Karate + OpenAPI strategy:</strong> use OpenAPI as the contract for discovering operations and deterministic test candidates; use the repository as context for configuration, authentication and conventions; measure coverage as evidence mapped back to HTTP method + normalized path; and use AI for bounded enhancement rather than as the only source of test logic.
+      </div>
+
+      <h2>The four signals I keep separate</h2>
+      <div class="principles">
+        <div class="card"><h3>1. Execution health</h3><p>Did the Karate scenarios that ran actually pass? A green build is useful, but it only speaks about known tests.</p></div>
+        <div class="card"><h3>2. Contract coverage</h3><p>Which OpenAPI operations have test evidence? This exposes endpoints and methods that a green suite may never exercise.</p></div>
+        <div class="card"><h3>3. Test quality</h3><p>Do scenarios make meaningful assertions, exercise boundaries and reuse project conventions instead of generating shallow syntax?</p></div>
+        <div class="card"><h3>4. Maintainability</h3><p>Can the suite evolve without overwriting hand-written intent, duplicating coverage or inventing configuration and test data?</p></div>
+      </div>
+
+      <h2>Use OpenAPI as a contract, not as a complete test suite</h2>
+      <p>
+        OpenAPI gives strong deterministic input: paths, HTTP methods, parameters, required fields, schemas, enums, formats, documented responses and security definitions. Those signals are excellent for discovering the API surface and creating candidate tests.
+      </p>
+      <p>
+        What OpenAPI usually does not know is equally important: where <code>baseUrl</code> comes from, how authentication helpers work, how test data is created, which reusable Karate features already exist, or what naming and tagging conventions the repository expects. Those belong to repository context.
+      </p>
+      <div class="flow">OpenAPI contract
+      ↓
+Discover operations and constraints
+      ↓
+Inspect repository conventions
+      ↓
+Map existing Karate scenarios to operations
+      ↓
+Identify evidence-backed gaps
+      ↓
+Generate only what is missing
+      ↓
+Execute and retain coverage evidence</div>
+
+      <h2>Measure operations, not just passing scenarios</h2>
+      <p>
+        A useful API coverage unit is <strong>HTTP method + normalized path</strong>. For example, <code>GET /orders/{id}</code> and <code>DELETE /orders/{id}</code> are separate operations even though they share a path.
+      </p>
+      <p>
+        This makes an important distinction explicit: <strong>execution health</strong> asks whether known tests passed; <strong>contract coverage</strong> asks whether the API surface has mapped test evidence. A suite can score 100% on the first signal and still have meaningful gaps on the second.
+      </p>
+
+      <h2>Generate deterministically first, then let AI add bounded value</h2>
+      <p>
+        Required fields, enums, numeric ranges, formats and documented status codes can produce deterministic positive, boundary and negative candidates. These rules are reproducible and reviewable, so they should form the baseline before an LLM is involved.
+      </p>
+      <p>
+        AI becomes more useful after that baseline exists: proposing richer business variations, explaining failures, suggesting assertions from examples, or helping maintain tests after a contract change. The important guardrail is that AI should enhance evidence, not replace the deterministic mapping between API contract and test suite.
+      </p>
+
+      <h2>Detailed guides</h2>
+      <div class="article-list">
+        <a class="article-card" href="/blog/openapi-to-karate-without-maintenance-nightmare/">
+          <span>Generation · Maintainability</span>
+          <h3>How to Generate Karate API Tests from OpenAPI — Without Creating a Maintenance Nightmare</h3>
+          <p>How to combine contract context with repository context, generate deterministic coverage first, and avoid disposable AI-generated tests.</p>
+        </a>
+        <a class="article-card" href="/blog/karate-api-coverage-openapi-gaps/">
+          <span>Coverage · Evidence</span>
+          <h3>Your Karate Tests Are Green. But Is Your API Actually Covered?</h3>
+          <p>How to map Karate evidence back to OpenAPI operations, distinguish pass rate from coverage and find the missing tests that matter.</p>
+        </a>
+      </div>
+
+      <h2>Common questions</h2>
+      <h3>Does 100% Karate pass rate mean the API is fully tested?</h3>
+      <p>No. It means all executed scenarios passed. It does not prove that every relevant OpenAPI operation has a mapped test.</p>
+      <h3>Should every OpenAPI endpoint generate a Karate test?</h3>
+      <p>Not blindly. First map existing evidence, understand reusable flows and project conventions, then generate missing coverage where the contract and risk justify it.</p>
+      <h3>Where should AI be used?</h3>
+      <p>After deterministic discovery and coverage mapping. AI is better used for bounded enrichment, explanation and maintenance than for inventing the entire suite without repository evidence.</p>
+
+      <div class="cta">
+        <strong>Karate Test Generator</strong>
+        <p>I maintain an open-source VS Code extension for generating, running, analysing and maintaining Karate API tests with OpenAPI-aware workflows.</p>
+        <div class="links">
+          <a class="button primary" href="https://github.com/mov2day/KaratePlugin">View on GitHub</a>
+          <a class="button" href="https://marketplace.visualstudio.com/items?itemName=MuthuKumarKoodalingam.karate-test-generator">VS Code Marketplace</a>
+          <a class="button" href="/blog/">Engineering notes</a>
+        </div>
+      </div>
+    </main>
+    <footer>Karate DSL · OpenAPI · API testing · Quality engineering</footer>
+  </body>
+</html>
