@@ -6,41 +6,48 @@ Goal: make the personal domain the canonical source for Muthu Kumar Koodalingam'
 
 ## Guiding principles
 
-- The personal domain is the canonical source; DEV, Medium, GitHub, marketplaces and social profiles amplify it.
+- The personal domain is the canonical source; DEV, Hashnode, GitHub, marketplaces and social profiles amplify it.
 - Prefer crawlable static HTML and durable metadata over client-only SEO techniques.
 - Optimize for useful technical answers and first-hand expertise, not keyword repetition.
 - Keep structured data consistent with visible page content.
 - Treat `llms.txt` as a discovery experiment, not a ranking mechanism.
-- Generate SEO assets automatically so new articles cannot silently miss required metadata.
+- Generate and validate SEO assets automatically so future changes cannot silently remove required metadata.
+
+## Implementation status
+
+| Phase | Status | Result |
+| --- | --- | --- |
+| 1. Technical search foundation | Complete | Canonicals, metadata, structured data, sitemap, crawler rules, RSS and `llms.txt` are generated in the normal build |
+| 2. Entity and expertise architecture | Complete | `/about/` is the first-party ProfilePage/Person source and articles link back to it |
+| 3. Karate / API testing topic hub | Complete | `/karate-api-testing/` organizes the strongest first-party topic cluster and links bidirectionally with supporting articles |
+| 4. First-class project pages | Complete | Four project pages now sit between the portfolio and GitHub/Marketplace, with project structured data and sitemap coverage |
+| 5. Canonical publishing and syndication | Complete for automated channels | DEV/Hashnode syndication is canonical-first; DEV canonicals can be repaired automatically |
+| 6. Measurement and regression protection | Complete in code | Production SEO checks run in CI/deployment; ongoing visibility tracking is documented in `docs/SEO_MEASUREMENT.md` |
 
 ## Phase 1 — Technical search foundation
 
-Status: in progress on `seo-ai-search-foundation`.
-
-Deliverables:
+Implemented:
 
 - Homepage canonical, robots directives, Open Graph and Twitter metadata.
 - `Person` and `WebSite` JSON-LD on the homepage.
 - `BlogPosting` JSON-LD on every generated article.
 - `CollectionPage` JSON-LD on the engineering notes index.
-- Generated `sitemap.xml` covering homepage, blog index and all published posts.
+- Generated `sitemap.xml` covering the homepage, entity page, topic hub, project pages, blog index and published posts.
 - RSS discovery links.
 - Search and AI crawler access through `robots.txt`.
 - Generated `llms.txt` with concise site, topic, article and project discovery information.
 - Build-time generation so SEO assets stay synchronized with Markdown content.
 
-Acceptance criteria:
-
-- `npm run build` succeeds.
-- Every public article has one canonical URL and one `BlogPosting` object.
-- `/robots.txt`, `/sitemap.xml`, `/rss.xml` and `/llms.txt` are emitted in the production build.
-- Sitemap contains every published Markdown article.
-
 ## Phase 2 — Entity and expertise architecture
 
-Create an indexable About / Profile page that establishes Muthu Kumar Koodalingam as the author and connects the domain to authoritative external profiles.
+Implemented:
 
-Target topics:
+- Dedicated `/about/` static page.
+- `ProfilePage` + `Person` structured data.
+- Clear expertise areas and first-party links to selected projects and writing.
+- Consistent `rel=author` and structured author references from articles and key pages.
+
+Primary entity topics:
 
 - Quality engineering
 - Test automation architecture
@@ -50,71 +57,65 @@ Target topics:
 - AI-assisted testing and agent guardrails
 - Open-source developer tooling
 
-Implementation:
-
-- Dedicated `/about/` static page.
-- `ProfilePage` + `Person` structured data.
-- Clear biography, experience, specialties, public projects and external identity links.
-- Consistent author link from every article.
-
 ## Phase 3 — Karate / API testing topic hub
 
-Create `/karate-api-testing/` as the canonical topic hub for the strongest existing content cluster.
+Implemented `/karate-api-testing/` as the primary first-party topic hub for:
 
-The hub should answer the topic directly, then organize supporting material around OpenAPI generation, API coverage, maintainability, authentication, contract testing, negative testing and AI-assisted maintenance.
+- OpenAPI-driven Karate test generation
+- repository-aware maintainability
+- API operation coverage
+- execution health vs contract coverage
+- deterministic generation before AI enhancement
 
-Implementation:
-
-- Static crawlable hub page.
-- Strong internal links between the hub and supporting articles.
-- Descriptive anchor text instead of generic "read more" links.
-- FAQ only where questions are genuinely answered in visible content.
-- Breadcrumb structured data for hub and articles.
+Supporting articles link back to the hub, and the hub links to the detailed articles and Karate Test Management project page/source ecosystem.
 
 ## Phase 4 — First-class project pages
 
-Move important projects from external-card-only discovery to authoritative pages on the personal domain.
+Implemented:
 
-Initial pages:
-
-- `/projects/karate-test-generator/`
+- `/projects/karate-test-management/`
 - `/projects/unifiedtest/`
 - `/projects/assertiq/`
 - `/projects/qe-mcp/`
 
-Each page should include the problem, users, architecture, key capabilities, evidence/screenshots where useful, source links, related writing and appropriate structured data.
+Homepage and About page project links now route through the owned domain first. The pages are included in the sitemap and `llms.txt`, and each links onward to the source repository or marketplace where relevant.
 
 ## Phase 5 — Canonical publishing and syndication
 
-Use the personal domain as the original publication location for technical writing.
+Current automated publishing contract:
 
-Process:
+1. Publish the Markdown article into the repository.
+2. Build the first-party static page with a self-canonical URL.
+3. Before syndication, verify the public first-party page is live and declares the expected canonical.
+4. Only then publish to configured external channels.
+5. DEV receives `canonical_url`; an existing title match with a missing/wrong canonical is repaired through the article update API.
+6. Hashnode receives `originalArticleURL` when API publishing is available.
+7. New syndicated copies include a visible original-source link.
 
-1. Publish on `muthukumarkoodalingam.com` first.
-2. Confirm the page is public, canonical and present in the sitemap.
-3. Syndicate to DEV / Medium or other platforms.
-4. Set the external platform's canonical URL to the original domain whenever supported.
-5. Link external profiles, repository READMEs and marketplace listings back to the relevant first-party page.
+Future external-channel work should preserve the same rule: the owned URL is the original source and the external property amplifies it.
 
-## Phase 6 — Search and AI-answer measurement
+## Phase 6 — Measurement and regression protection
 
-Track visibility instead of assuming metadata changes improve discovery.
+Implemented in code:
 
-Metrics:
+- `npm run seo:check` validates the production build.
+- Pull-request validation runs the SEO check after the production build.
+- GitHub Pages deployment is blocked if the SEO check fails.
+- The check validates required discovery files, sitemap-to-file consistency, titles, descriptions, indexable robots directives, one matching self-canonical, JSON-LD, AI crawler rules, RSS and `llms.txt` links.
 
-- Google Search Console indexed pages, impressions, queries, CTR and crawl issues.
-- Branded vs non-branded organic queries.
-- Landing-page performance for topic hubs and project pages.
-- Referral traffic from AI/search products where referrer data is available.
-- Periodic manual citation checks for representative technical questions.
-- Backlinks from GitHub, marketplaces and syndicated publications to canonical first-party pages.
+Ongoing measurement is defined in `docs/SEO_MEASUREMENT.md`:
+
+- Google Search Console indexing, impressions, clicks, CTR and queries.
+- branded vs non-branded discovery.
+- landing-page performance for topic hubs and project pages.
+- referral traffic from search/answer products where available.
+- repeatable AI citation checks for representative technical questions.
+- checks for external properties being cited instead of the first-party page.
 
 ## Content backlog
 
 Prioritize high-intent questions where first-hand engineering experience provides differentiated answers:
 
-- How to generate maintainable Karate tests from OpenAPI.
-- How to measure API operation coverage instead of only test pass rate.
 - How to structure Karate test suites for large APIs.
 - Deterministic generation vs LLM-only test generation.
 - Contract testing alongside Karate API tests.
@@ -122,6 +123,10 @@ Prioritize high-intent questions where first-hand engineering experience provide
 - Where AI agents need deterministic QA guardrails.
 - Component-first mobile test architecture and selective end-to-end testing.
 
+The first two original backlog items—maintainable OpenAPI-to-Karate generation and API operation coverage—are already covered by first-party articles and the Karate topic hub.
+
 ## Definition of success
 
 The domain should become the clearest machine-readable and human-readable source for Muthu Kumar Koodalingam's technical work, while external platforms reinforce rather than replace that source.
+
+Success is measured by owned-page indexing, relevant non-branded search discovery, first-party citations in answer engines, and an increasing share of traffic/citations landing on the owned domain rather than only on GitHub, DEV or marketplaces.
