@@ -6,6 +6,7 @@ const projects = [
     body: "A Gradle plugin that turns Java test output into structured reports, OpenTelemetry signals and test-management evidence.",
     tags: ["Java / Gradle", "JUnit · TestNG", "OpenTelemetry"],
     href: "/projects/unifiedtest/",
+    visual: "telemetry",
   },
   {
     no: "02",
@@ -14,6 +15,7 @@ const projects = [
     body: "A VS Code workspace for creating, running, analysing and maintaining Karate API tests with OpenAPI coverage and project-aware execution.",
     tags: ["TypeScript", "OpenAPI · Postman", "Karate DSL"],
     href: "/projects/karate-test-management/",
+    visual: "api",
   },
   {
     no: "03",
@@ -22,6 +24,7 @@ const projects = [
     body: "Static test intelligence for JavaScript, TypeScript and pytest suites, with actionable findings and CI gates for new quality debt.",
     tags: ["JS · TS · pytest", "HTML · JSON · SARIF", "GitHub Action"],
     href: "/projects/assertiq/",
+    visual: "analysis",
   },
   {
     no: "04",
@@ -30,19 +33,23 @@ const projects = [
     body: "An MCP server that grounds coding agents in repository-aware test plans, layered validation and strategy-based quality gates.",
     tags: ["Python / FastMCP", "pytest · Compose", "Quality gates"],
     href: "/projects/qe-mcp/",
+    visual: "agents",
   },
 ];
 
 const principles = [
   {
+    no: "01",
     title: "Test the risk, not the checklist",
     body: "Use the cheapest test level that can expose the failure that matters. Coverage should protect decisions, not inflate a dashboard.",
   },
   {
+    no: "02",
     title: "Make every red build worth reading",
     body: "A failure should arrive with context, a likely cause and a next step. Good reporting shortens the distance from red to resolved.",
   },
   {
+    no: "03",
     title: "Build it so the team owns it",
     body: "Patterns, documentation and coaching turn a framework into a shared capability. If one person must guard it, it does not scale.",
   },
@@ -79,312 +86,381 @@ const roles = [
   },
 ];
 
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h13M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
+function ProjectVisual({ visual }: { visual: string }) {
+  if (visual === "telemetry") {
+    return (
+      <div className="project-visual telemetry-visual" aria-hidden="true">
+        <div className="visual-toolbar">
+          <span />
+          <span />
+          <span />
+          <small>run #4821</small>
+        </div>
+        <div className="telemetry-grid">
+          <div className="telemetry-chart">
+            <span style={{ height: "42%" }} />
+            <span style={{ height: "68%" }} />
+            <span style={{ height: "52%" }} />
+            <span style={{ height: "84%" }} />
+            <span style={{ height: "72%" }} />
+            <span style={{ height: "92%" }} />
+          </div>
+          <div className="signal-list">
+            <span><i /> JUnit</span>
+            <span><i /> TestNG</span>
+            <span><i /> Karate</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === "api") {
+    return (
+      <div className="project-visual api-visual" aria-hidden="true">
+        <div className="visual-toolbar">
+          <span />
+          <span />
+          <span />
+          <small>coverage.map</small>
+        </div>
+        <div className="endpoint-list">
+          <div><b>GET</b><span>/customers</span><em>covered</em></div>
+          <div><b>POST</b><span>/orders</span><em>covered</em></div>
+          <div className="endpoint-gap"><b>PATCH</b><span>/customers/:id</span><em>gap</em></div>
+          <div><b>DELETE</b><span>/orders/:id</span><em>covered</em></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (visual === "analysis") {
+    return (
+      <div className="project-visual analysis-visual" aria-hidden="true">
+        <div className="visual-toolbar">
+          <span />
+          <span />
+          <span />
+          <small>assertiq scan</small>
+        </div>
+        <div className="code-lines">
+          <span className="code-line long" />
+          <span className="code-line medium" />
+          <span className="code-line short alert"><i>!</i></span>
+          <span className="code-line long" />
+          <span className="code-line medium warning"><i>2</i></span>
+          <span className="code-line short" />
+        </div>
+        <div className="analysis-chip">2 actionable findings</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-visual agent-visual" aria-hidden="true">
+      <div className="visual-toolbar">
+        <span />
+        <span />
+        <span />
+        <small>quality graph</small>
+      </div>
+      <div className="agent-network">
+        <div className="network-line line-a" />
+        <div className="network-line line-b" />
+        <div className="network-line line-c" />
+        <div className="network-node node-core">QE</div>
+        <div className="network-node node-a">Plan</div>
+        <div className="network-node node-b">Test</div>
+        <div className="network-node node-c">Gate</div>
+      </div>
+    </div>
+  );
+}
+
+function QualityOrb() {
+  return (
+    <div className="quality-orb" aria-hidden="true">
+      <div className="orb-ring orb-ring-one" />
+      <div className="orb-ring orb-ring-two" />
+      <div className="orb-ring orb-ring-three" />
+      <div className="orb-axis orb-axis-x" />
+      <div className="orb-axis orb-axis-y" />
+      <div className="orb-sweep" />
+      <div className="orb-node orb-node-a" />
+      <div className="orb-node orb-node-b" />
+      <div className="orb-node orb-node-c" />
+      <div className="orb-core">
+        <span>QA</span>
+        <small>signal</small>
+      </div>
+    </div>
+  );
+}
+
 export function Portfolio() {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground selection:bg-accent selection:text-accent-foreground">
-      <a href="#content" className="skip-link">
-        Skip to content
-      </a>
+    <div className="portfolio-shell">
+      <a href="#content" className="skip-link">Skip to content</a>
 
-      <nav className="site-nav sticky top-0 z-50 flex items-center justify-between border-b border-foreground/8 bg-background/90 px-5 py-4 backdrop-blur-md sm:px-6">
-        <a href="#content" className="font-mono text-sm font-bold tracking-tight">
-          Muthu Kumar
-        </a>
-        <div className="hidden gap-8 font-mono text-xs tracking-widest uppercase md:flex">
-          <a href="/about/" className="transition-colors hover:text-accent">
-            About
+      <nav className="site-nav" aria-label="Primary navigation">
+        <div className="nav-inner">
+          <a href="#content" className="brand" aria-label="Muthu Kumar — home">
+            <span className="brand-mark">MK</span>
+            <span className="brand-copy">Muthu Kumar</span>
           </a>
-          <a href="#projects" className="transition-colors hover:text-accent">
-            Projects
-          </a>
-          <a href="#principles" className="transition-colors hover:text-accent">
-            Principles
-          </a>
-          <a href="#experience" className="transition-colors hover:text-accent">
-            Experience
-          </a>
-          <a href="/blog/" className="transition-colors hover:text-accent">
-            Notes
-          </a>
-          <a
-            href="#contact"
-            className="bg-foreground px-3 py-1 text-background transition-colors hover:bg-accent"
-          >
-            Contact
-          </a>
-        </div>
-        <div className="flex items-center gap-3 md:hidden">
-          <a
-            href="/about/"
-            className="font-mono text-[10px] tracking-widest uppercase transition-colors hover:text-accent"
-          >
-            About
-          </a>
-          <a
-            href="/blog/"
-            className="font-mono text-[10px] tracking-widest uppercase transition-colors hover:text-accent"
-          >
-            Notes
-          </a>
-          <a
-            href="#contact"
-            className="bg-foreground px-3 py-1.5 font-mono text-[10px] tracking-widest text-background uppercase transition-colors hover:bg-accent"
-          >
-            Contact
+          <div className="nav-links">
+            <a href="#projects">Work</a>
+            <a href="#principles">Principles</a>
+            <a href="#experience">Experience</a>
+            <a href="/blog/">Notes</a>
+          </div>
+          <a href="#contact" className="nav-cta">
+            Contact <ArrowIcon />
           </a>
         </div>
       </nav>
 
       <main id="content">
-        <header className="hero-grid page-enter relative mx-auto max-w-7xl px-6 pt-20 pb-24 md:pt-24 md:pb-32">
-          <div className="max-w-3xl">
-            <div className="mb-6 inline-block rounded-full border border-foreground/10 px-3 py-1">
-              <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-                Senior QA Automation Engineer / Frankfurt, DE
-              </span>
+        <header className="hero-section">
+          <div className="hero-glow" aria-hidden="true" />
+          <div className="hero-grid page-enter">
+            <div className="hero-copy">
+              <div className="eyebrow">
+                <span className="eyebrow-dot" />
+                Quality engineering · Frankfurt, DE
+              </div>
+              <h1 className="hero-title">
+                Release confidence,
+                <span> engineered.</span>
+              </h1>
+              <p className="hero-lede">
+                I design test systems that turn complex delivery risk into fast, inspectable evidence — across mobile, APIs, CI and AI-assisted engineering.
+              </p>
+              <div className="hero-actions">
+                <a href="#projects" className="button button-primary">
+                  Explore selected work <ArrowIcon />
+                </a>
+                <a href="/blog/" className="button button-ghost">
+                  Read engineering notes
+                </a>
+              </div>
+              <div className="hero-signals" aria-label="Areas of expertise">
+                <span>Test architecture</span>
+                <span>Automation systems</span>
+                <span>AI for QA</span>
+              </div>
             </div>
-            <h1 className="mb-8 text-5xl leading-[0.92] font-extrabold tracking-[-0.055em] text-balance sm:text-6xl md:text-8xl">
-              I turn release <span className="text-accent">risk</span> into evidence.
-            </h1>
-            <p className="max-w-2xl text-xl leading-relaxed text-muted-foreground">
-              Fourteen years building automation that catches what matters, explains what broke and
-              gives teams a clear reason to ship.
-            </p>
-            <div className="expertise-line mt-10 flex flex-wrap gap-x-6 gap-y-3 font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-              <span>Test architecture</span>
-              <span>Feedback systems</span>
-              <span>AI for QA</span>
+
+            <div className="hero-console" aria-label="Quality signal visualization">
+              <div className="console-topline">
+                <span className="console-label">QUALITY / SIGNAL MAP</span>
+                <span className="live-status"><i /> LIVE</span>
+              </div>
+              <div className="orb-stage">
+                <QualityOrb />
+              </div>
+              <div className="console-metrics">
+                <div>
+                  <small>Feedback</small>
+                  <strong>&lt; PR</strong>
+                </div>
+                <div>
+                  <small>Evidence</small>
+                  <strong>Layered</strong>
+                </div>
+                <div>
+                  <small>Signal</small>
+                  <strong>Actionable</strong>
+                </div>
+              </div>
             </div>
           </div>
         </header>
 
-        <section className="perspective-band bg-foreground px-6 py-20 text-background md:py-24">
-          <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-2">
-            <div>
-              <h2 className="mb-8 font-mono text-xs tracking-[0.3em] text-accent uppercase">
-                Point of view
-              </h2>
-              <p className="text-3xl leading-snug font-light">
-                The best test suite does more than pass. It makes the next release decision easier
-                to defend.
+        <div className="marquee-band" aria-hidden="true">
+          <div className="marquee-track">
+            <span>TEST ARCHITECTURE</span><i>✦</i>
+            <span>MOBILE AUTOMATION</span><i>✦</i>
+            <span>API QUALITY</span><i>✦</i>
+            <span>OBSERVABILITY</span><i>✦</i>
+            <span>AI-ASSISTED QA</span><i>✦</i>
+            <span>RELEASE CONFIDENCE</span><i>✦</i>
+            <span>TEST ARCHITECTURE</span><i>✦</i>
+            <span>MOBILE AUTOMATION</span><i>✦</i>
+            <span>API QUALITY</span><i>✦</i>
+            <span>OBSERVABILITY</span><i>✦</i>
+            <span>AI-ASSISTED QA</span><i>✦</i>
+            <span>RELEASE CONFIDENCE</span><i>✦</i>
+          </div>
+        </div>
+
+        <section className="section-shell proof-section" aria-label="Engineering impact">
+          <div className="bento-grid">
+            <article className="bento-card bento-intro">
+              <span className="section-kicker">What I optimize for</span>
+              <h2>Evidence before confidence.</h2>
+              <p>
+                The best automation does not just produce green builds. It shortens the path from change to an informed release decision.
               </p>
-            </div>
-            <div className="grid grid-cols-2 gap-8 md:border-l md:border-background/10 md:pl-16">
-              <div className="metric-cell">
-                <span className="mb-2 block font-mono text-4xl">14</span>
-                <span className="text-xs tracking-widest text-background/50 uppercase">
-                  Years solving quality problems
-                </span>
+              <div className="signal-wave" aria-hidden="true">
+                <span /><span /><span /><span /><span /><span /><span /><span /><span />
               </div>
-              <div className="metric-cell">
-                <span className="mb-2 block font-mono text-4xl">04</span>
-                <span className="text-xs tracking-widest text-background/50 uppercase">
-                  Tools shipped in public
-                </span>
+            </article>
+            <article className="bento-card metric-card metric-years">
+              <span className="metric-number">14+</span>
+              <span className="metric-label">years solving quality problems</span>
+              <div className="metric-orbit" aria-hidden="true"><i /><i /><i /></div>
+            </article>
+            <article className="bento-card metric-card metric-speed">
+              <span className="metric-number">28%</span>
+              <span className="metric-label">faster test execution</span>
+              <div className="speed-bars" aria-hidden="true">
+                <span /><span /><span /><span /><span />
               </div>
-              <div className="metric-cell">
-                <span className="mb-2 block font-mono text-4xl">28%</span>
-                <span className="text-xs tracking-widest text-background/50 uppercase">
-                  Faster test execution
-                </span>
+            </article>
+            <article className="bento-card metric-card metric-tools">
+              <span className="metric-number">04</span>
+              <span className="metric-label">public tools highlighted</span>
+              <div className="tool-stack" aria-hidden="true">
+                <span>UT</span><span>KT</span><span>AI</span><span>QE</span>
               </div>
-              <div className="metric-cell">
-                <span className="mb-2 block font-mono text-4xl">CTFL</span>
-                <span className="text-xs tracking-widest text-background/50 uppercase">
-                  Certified foundation
-                </span>
-              </div>
-            </div>
+            </article>
           </div>
         </section>
 
-        <section id="projects" className="mx-auto max-w-7xl scroll-mt-20 px-6 py-24 md:py-32">
-          <div className="mb-16 flex items-end justify-between border-b border-foreground/10 pb-8">
+        <section id="projects" className="section-shell projects-section">
+          <div className="section-heading">
             <div>
-              <span className="font-mono text-[10px] tracking-[0.25em] text-accent uppercase">
-                Selected open-source work
-              </span>
-              <h2 className="mt-3 text-4xl font-bold tracking-tight">
-                Tools that remove QA friction.
-              </h2>
+              <span className="section-kicker">Selected open-source work</span>
+              <h2>Tools that make quality visible.</h2>
             </div>
-            <span className="font-mono text-xs text-muted-foreground">/04_ENTRIES</span>
+            <p>
+              Built around a recurring idea: better engineering decisions need better evidence, not more test noise.
+            </p>
           </div>
 
-          <div className="grid gap-px border border-foreground/10 bg-foreground/10 md:grid-cols-2">
-            {projects.map((p) => (
-              <a
-                key={p.no}
-                href={p.href}
-                className="project-card group relative flex h-full flex-col overflow-hidden bg-background p-6 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-secondary focus-visible:z-10 md:p-10"
-              >
-                <span className="mb-4 block font-mono text-xs text-accent">
-                  {p.no}. {p.name}
-                </span>
-                <h3 className="mb-4 text-2xl font-bold">{p.title}</h3>
-                <p className="mb-8 text-muted-foreground">{p.body}</p>
-                <div className="mt-auto flex flex-wrap gap-3">
-                  {p.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="border border-foreground/10 bg-foreground/5 px-2 py-1 font-mono text-[10px] uppercase"
-                    >
-                      {t}
-                    </span>
-                  ))}
+          <div className="project-grid">
+            {projects.map((project) => (
+              <a key={project.no} href={project.href} className={`project-card project-${project.visual}`}>
+                <div className="project-topline">
+                  <span>{project.no}</span>
+                  <span>{project.name}</span>
+                  <span className="project-open"><ArrowIcon /></span>
                 </div>
-                <span className="project-arrow" aria-hidden="true">
-                  →
-                </span>
+                <ProjectVisual visual={project.visual} />
+                <div className="project-copy">
+                  <h3>{project.title}</h3>
+                  <p>{project.body}</p>
+                  <div className="project-tags">
+                    {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                  </div>
+                </div>
               </a>
             ))}
           </div>
         </section>
 
-        <section
-          id="principles"
-          className="scroll-mt-20 border-y border-foreground/5 bg-secondary px-6 py-24 md:py-32"
-        >
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-16 max-w-2xl">
-              <h2 className="font-mono text-xs tracking-[0.3em] uppercase">How I build</h2>
-              <p className="mt-5 text-2xl leading-snug font-medium tracking-tight">
-                Three rules for automation people can run, read and trust.
+        <section id="principles" className="principles-wrap">
+          <div className="principles-panel">
+            <div className="principles-intro">
+              <span className="section-kicker">How I build</span>
+              <h2>Automation people can run, read and trust.</h2>
+              <p>
+                Quality engineering scales when the system itself makes the right behavior easier for the whole team.
               </p>
             </div>
-            <div className="grid gap-12 md:grid-cols-3">
-              {principles.map((pr, index) => (
-                <div key={pr.title} className="principle-item">
-                  <span className="mb-8 block font-mono text-xs text-accent">0{index + 1}</span>
-                  <h3 className="mb-4 text-lg font-bold">{pr.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{pr.body}</p>
-                </div>
+            <div className="principle-list">
+              {principles.map((principle) => (
+                <article key={principle.no} className="principle-row">
+                  <span className="principle-no">{principle.no}</span>
+                  <h3>{principle.title}</h3>
+                  <p>{principle.body}</p>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="experience" className="mx-auto max-w-7xl scroll-mt-20 px-6 py-24 md:py-32">
-          <div className="flex flex-col gap-16 md:flex-row">
-            <div className="md:w-1/3 md:shrink-0">
-              <h2 className="sticky top-32 text-4xl font-bold tracking-tight">
-                Built in the real world.
-              </h2>
-              <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground md:sticky md:top-56">
-                Product, consulting and enterprise teams — each with different constraints, all
-                needing faster feedback.
+        <section id="experience" className="section-shell experience-section">
+          <div className="experience-layout">
+            <div className="experience-intro">
+              <span className="section-kicker">Experience</span>
+              <h2>Built in the real world.</h2>
+              <p>
+                Product, consulting and enterprise teams — different constraints, same need for faster, clearer feedback.
               </p>
+              <a href="/about/" className="text-link">More about my work <ArrowIcon /></a>
             </div>
-            <div className="space-y-20 md:w-2/3">
-              {roles.map((r) => (
-                <div
-                  key={r.title}
-                  className={`role-item relative border-l-2 pl-8 ${
-                    r.current ? "border-accent" : "border-accent/20"
-                  }`}
-                >
-                  <div
-                    className={`absolute -left-[9px] top-0 h-4 w-4 rounded-full ${
-                      r.current ? "bg-accent" : "bg-foreground"
-                    }`}
-                  />
-                  <span className="font-mono text-xs text-muted-foreground">{r.period}</span>
-                  <h3 className="mt-2 text-2xl font-bold">{r.title}</h3>
-                  <p className="mb-4 font-mono text-sm text-accent">{r.place}</p>
-                  <p className="text-muted-foreground">{r.body}</p>
-                </div>
+            <div className="timeline">
+              {roles.map((role) => (
+                <article key={`${role.period}-${role.title}`} className={`timeline-item ${role.current ? "is-current" : ""}`}>
+                  <div className="timeline-marker" aria-hidden="true"><span /></div>
+                  <div className="timeline-period">{role.period}</div>
+                  <div className="timeline-copy">
+                    <div className="timeline-title-row">
+                      <h3>{role.title}</h3>
+                      {role.current && <span className="current-pill">Current</span>}
+                    </div>
+                    <span className="timeline-place">{role.place}</span>
+                    <p>{role.body}</p>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-20 md:py-24">
-          <div className="focus-panel relative overflow-hidden bg-foreground p-8 text-background sm:p-12 md:p-20">
-            <div className="relative z-10 max-w-2xl">
-              <h2 className="mb-6 font-mono text-xs tracking-widest text-accent uppercase">
-                Current focus
-              </h2>
-              <p className="mb-8 text-3xl font-light">
-                AI should sharpen QA judgment, not replace it. I’m building practical ways to carry
-                test expertise into everyday engineering — with agents, reusable skills and quality
-                gates that keep people accountable.
+        <section className="section-shell focus-section">
+          <div className="focus-card">
+            <div className="focus-noise" aria-hidden="true" />
+            <div className="focus-copy">
+              <span className="section-kicker">Current focus</span>
+              <h2>AI should sharpen QA judgment, not replace it.</h2>
+              <p>
+                I’m building practical ways to carry test expertise into everyday engineering — with agents, reusable skills and quality gates that keep evidence inspectable and people accountable.
               </p>
-              <div className="flex items-center gap-4">
-                <div className="h-2 w-2 animate-pulse rounded-full bg-accent" />
-                <span className="font-mono text-xs tracking-widest uppercase">
-                  Open to thoughtful collaborations
-                </span>
-              </div>
+              <div className="availability"><i /> Open to thoughtful collaborations</div>
             </div>
-            <div className="absolute right-[-10%] bottom-[-20%] opacity-10">
-              <span className="text-[20rem] font-black tracking-tighter">QA</span>
+            <div className="focus-visual" aria-hidden="true">
+              <div className="focus-ring ring-one" />
+              <div className="focus-ring ring-two" />
+              <div className="focus-ring ring-three" />
+              <div className="focus-core">QA</div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer
-        id="contact"
-        className="site-footer scroll-mt-20 border-t border-foreground/5 px-6 py-20 md:py-24"
-      >
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-12 md:flex-row">
-          <div>
-            <h2 className="mb-8 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-              Let’s make your next
-              <br />
-              release easier to trust.
-            </h2>
-            <a
-              href="mailto:k.muthukumar90@yahoo.in"
-              className="font-mono text-base text-accent underline-offset-8 transition-all hover:underline hover:decoration-2 sm:text-xl md:text-2xl"
-            >
-              k.muthukumar90@yahoo.in
+      <footer id="contact" className="site-footer">
+        <div className="footer-pixels" aria-hidden="true" />
+        <div className="footer-inner">
+          <span className="section-kicker">Start a conversation</span>
+          <div className="footer-main">
+            <h2>Make the next release easier to trust.</h2>
+            <a href="mailto:k.muthukumar90@yahoo.in" className="footer-email">
+              k.muthukumar90@yahoo.in <ArrowIcon />
             </a>
           </div>
-          <div className="grid grid-cols-2 gap-x-12 gap-y-4 sm:gap-x-24">
-            <div className="flex flex-col">
-              <span className="mb-2 font-mono text-[10px] text-muted-foreground uppercase">
-                Socials
-              </span>
-              <a href="/about/" className="text-sm hover:text-accent">
-                About
-              </a>
-              <a
-                href="https://www.linkedin.com/in/muthukumark12/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm hover:text-accent"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://github.com/mov2day"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm hover:text-accent"
-              >
-                GitHub
-              </a>
-              <a href="/blog/" className="text-sm hover:text-accent">
-                Engineering Notes
-              </a>
+          <div className="footer-bottom">
+            <div className="footer-links">
+              <a href="/about/">About</a>
+              <a href="https://www.linkedin.com/in/muthukumark12/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://github.com/mov2day" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="/blog/">Engineering notes</a>
             </div>
-            <div className="flex flex-col">
-              <span className="mb-2 font-mono text-[10px] text-muted-foreground uppercase">
-                Location
-              </span>
-              <span className="text-sm">Frankfurt am Main</span>
-              <span className="text-sm">Germany</span>
+            <div className="footer-meta">
+              <span>Frankfurt am Main · Germany</span>
+              <span>© 2026 Muthu Kumar Koodalingam</span>
             </div>
           </div>
-        </div>
-        <div className="mx-auto mt-24 flex max-w-7xl justify-between border-t border-foreground/5 pt-8">
-          <span className="font-mono text-[10px] text-muted-foreground">
-            © 2026 Muthu Kumar Koodalingam
-          </span>
-          <span className="font-mono text-[10px] text-muted-foreground uppercase">
-            Evidence before confidence
-          </span>
         </div>
       </footer>
     </div>
